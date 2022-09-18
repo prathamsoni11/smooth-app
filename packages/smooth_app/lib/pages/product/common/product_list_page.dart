@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_app/data_models/product_list.dart';
 import 'package:smooth_app/data_models/up_to_date_product_provider.dart';
@@ -12,6 +12,7 @@ import 'package:smooth_app/database/dao_product_list.dart';
 import 'package:smooth_app/database/local_database.dart';
 import 'package:smooth_app/generic_lib/design_constants.dart';
 import 'package:smooth_app/generic_lib/dialogs/smooth_alert_dialog.dart';
+import 'package:smooth_app/generic_lib/duration_constants.dart';
 import 'package:smooth_app/generic_lib/loading_dialog.dart';
 import 'package:smooth_app/helpers/robotoff_insight_helper.dart';
 import 'package:smooth_app/pages/inherited_data_manager.dart';
@@ -50,6 +51,21 @@ class _ProductListPageState extends State<ProductListPage>
   void initState() {
     super.initState();
     productList = widget.productList;
+  }
+
+  //returns bool to handle WillPopScope
+  Future<bool> _handleUserBacktap() async {
+    if (_selectionMode) {
+      setState(
+        () {
+          _selectionMode = false;
+          _selectedBarcodes.clear();
+        },
+      );
+      return false;
+    } else {
+      return true;
+    }
   }
 
   @override
@@ -98,10 +114,15 @@ class _ProductListPageState extends State<ProductListPage>
                           context: context,
                           builder: (BuildContext context) {
                             return SmoothAlertDialog(
-                              body: Text(appLocalizations.confirm_clear),
+                              body: Text(
+                                productList.listType == ProductListType.USER
+                                    ? appLocalizations.confirm_clear_user_list(
+                                        productList.parameters)
+                                    : appLocalizations.confirm_clear,
+                              ),
                               positiveAction: SmoothActionButton(
                                 onPressed: () async {
-                                  daoProductList.clear(productList);
+                                  await daoProductList.clear(productList);
                                   await daoProductList.get(productList);
                                   setState(() {});
                                   if (!mounted) {
@@ -186,45 +207,48 @@ class _ProductListPageState extends State<ProductListPage>
                 InheritedDataManager.of(context).resetShowSearchCard(true);
               },
             )
-          : RefreshIndicator(
-              //if it is in selectmode then refresh indicator is not shown
-              notificationPredicate:
-                  _selectionMode ? (_) => false : (_) => true,
-              onRefresh: () async => _refreshListProducts(
-                products,
-                localDatabase,
-                appLocalizations,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  if (_selectionMode)
-                    Padding(
-                      padding: const EdgeInsets.all(SMALL_SPACE),
-                      child: _buildCompareBar(products, appLocalizations),
-                    ),
-                  Expanded(
-                    child: Consumer<UpToDateProductProvider>(
-                      builder: (
-                        _,
-                        final UpToDateProductProvider provider,
-                        __,
-                      ) =>
-                          ListView.builder(
-                        itemCount: products.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _buildItem(
-                            dismissible,
-                            products,
-                            index,
-                            localDatabase,
-                            appLocalizations,
-                          );
-                        },
+          : WillPopScope(
+              onWillPop: _handleUserBacktap,
+              child: RefreshIndicator(
+                //if it is in selectmode then refresh indicator is not shown
+                notificationPredicate:
+                    _selectionMode ? (_) => false : (_) => true,
+                onRefresh: () async => _refreshListProducts(
+                  products,
+                  localDatabase,
+                  appLocalizations,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    if (_selectionMode)
+                      Padding(
+                        padding: const EdgeInsets.all(SMALL_SPACE),
+                        child: _buildCompareBar(products, appLocalizations),
+                      ),
+                    Expanded(
+                      child: Consumer<UpToDateProductProvider>(
+                        builder: (
+                          _,
+                          final UpToDateProductProvider provider,
+                          __,
+                        ) =>
+                            ListView.builder(
+                          itemCount: products.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return _buildItem(
+                              dismissible,
+                              products,
+                              index,
+                              localDatabase,
+                              appLocalizations,
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
     );
@@ -291,10 +315,11 @@ class _ProductListPageState extends State<ProductListPage>
         onDismissed: (final DismissDirection direction) async {
           final bool removed = productList.remove(barcode);
           if (removed) {
-            DaoProductList(localDatabase).put(productList);
+            await DaoProductList(localDatabase).put(productList);
             _selectedBarcodes.remove(barcode);
             setState(() => barcodes.removeAt(index));
           }
+          //ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -302,7 +327,7 @@ class _ProductListPageState extends State<ProductListPage>
                     ? appLocalizations.product_removed_history
                     : appLocalizations.product_could_not_remove,
               ),
-              duration: const Duration(seconds: 3),
+              duration: SnackBarDuration.medium,
             ),
           );
           // TODO(monsieurtanuki): add a snackbar ("put back the food")
@@ -343,7 +368,7 @@ class _ProductListPageState extends State<ProductListPage>
                 products.length,
               ),
             ),
-            duration: const Duration(seconds: 2),
+            duration: SnackBarDuration.short,
           ),
         );
         setState(() {});
@@ -360,13 +385,15 @@ class _ProductListPageState extends State<ProductListPage>
     final LocalDatabase localDatabase,
   ) async {
     try {
-      final SearchResult searchResult = await OpenFoodAPIClient.getProductList(
+      final SearchResult searchResult = await OpenFoodAPIClient.searchProducts(
         ProductQuery.getUser(),
-        ProductListQueryConfiguration(
-          barcodes,
+        ProductSearchQueryConfiguration(
           fields: ProductQuery.fields,
           language: ProductQuery.getLanguage(),
           country: ProductQuery.getCountry(),
+          parametersList: <Parameter>[
+            BarcodeParameter.list(barcodes),
+          ],
         ),
       );
       final List<Product>? freshProducts = searchResult.products;
@@ -404,9 +431,9 @@ class _ProductListPageState extends State<ProductListPage>
                     if (!mounted) {
                       return;
                     }
-                    await Navigator.push<Widget>(
+                    await Navigator.push<void>(
                       context,
-                      MaterialPageRoute<Widget>(
+                      MaterialPageRoute<void>(
                         builder: (BuildContext context) =>
                             PersonalizedRankingPage(
                           barcodes: list,

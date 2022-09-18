@@ -23,6 +23,7 @@ class WelcomePage extends StatelessWidget {
 
     return SmoothScaffold(
       backgroundColor: backgroundColor,
+      brightness: Brightness.dark,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,6 +104,7 @@ class WelcomePage extends StatelessWidget {
           NextButton(
             OnboardingPage.WELCOME,
             backgroundColor: backgroundColor,
+            nextKey: const Key('nextAfterWelcome'),
           ),
         ],
       ),

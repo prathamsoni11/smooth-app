@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:smooth_app/data_models/onboarding_data_product.dart';
 import 'package:smooth_app/database/local_database.dart';
@@ -21,6 +20,7 @@ class KnowledgePanelPageTemplate extends StatefulWidget {
     required this.localDatabase,
     required this.backgroundColor,
     required this.svgAsset,
+    required this.nextKey,
   });
 
   final String headerTitle;
@@ -32,6 +32,7 @@ class KnowledgePanelPageTemplate extends StatefulWidget {
   final LocalDatabase localDatabase;
   final Color backgroundColor;
   final String svgAsset;
+  final Key nextKey;
 
   @override
   State<KnowledgePanelPageTemplate> createState() =>
@@ -41,7 +42,6 @@ class KnowledgePanelPageTemplate extends StatefulWidget {
 class _KnowledgePanelPageTemplateState
     extends State<KnowledgePanelPageTemplate> {
   late Future<void> _initFuture;
-  late KnowledgePanels _knowledgePanels;
   bool _isHintDismissed = false;
   late final AppLocalizations appLocalizations = AppLocalizations.of(context);
   late final Product _product;
@@ -55,7 +55,6 @@ class _KnowledgePanelPageTemplateState
   Future<void> _init() async {
     _product = await OnboardingDataProduct.forProduct(widget.localDatabase)
         .getData(rootBundle);
-    _knowledgePanels = _product.knowledgePanels!;
   }
 
   @override
@@ -71,14 +70,13 @@ class _KnowledgePanelPageTemplateState
             );
           }
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator.adaptive());
           }
           final Widget knowledgePanelWidget = KnowledgePanelWidget(
             panelElement: KnowledgePanelWidget.getPanelElement(
-              _knowledgePanels,
+              _product,
               widget.panelId,
             )!,
-            knowledgePanels: _knowledgePanels,
             product: _product,
             onboardingMode: true,
           );
@@ -118,6 +116,7 @@ class _KnowledgePanelPageTemplateState
                       NextButton(
                         widget.page,
                         backgroundColor: widget.backgroundColor,
+                        nextKey: widget.nextKey,
                       ),
                     ],
                   ),
@@ -131,6 +130,7 @@ class _KnowledgePanelPageTemplateState
 
   List<Widget> _buildHintPopup() {
     final Widget hintPopup = InkWell(
+      key: const Key('toolTipPopUp'),
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 30),
         color: Theme.of(context).hintColor.withOpacity(0.9),
@@ -160,19 +160,22 @@ class _KnowledgePanelPageTemplateState
             OnboardingPage.HEALTH_CARD_EXAMPLE) &&
         !OnboardingFlowNavigator.isOnboardingPagedInHistory(
             OnboardingPage.ECO_CARD_EXAMPLE)) {
-      hitPopup.add(InkWell(
-        child: const DecoratedBox(
-          decoration: BoxDecoration(color: Colors.transparent),
+      hitPopup.add(
+        Positioned(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                // slightly lower than bottom bar top
+                bottom: 2 * VERY_LARGE_SPACE +
+                    MINIMUM_TOUCH_SIZE -
+                    .5 * VERY_LARGE_SPACE,
+              ),
+              child: hintPopup,
+            ),
+          ),
         ),
-        onTap: () {
-          setState(() {
-            _isHintDismissed = true;
-          });
-        },
-      ));
-      hitPopup.add(Positioned(
-        child: Align(alignment: Alignment.center, child: hintPopup),
-      ));
+      );
     }
     return hitPopup;
   }

@@ -1,10 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_app/background/background_task_image.dart';
 import 'package:smooth_app/data_models/continuous_scan_model.dart';
-import 'package:smooth_app/generic_lib/loading_dialog.dart';
-import 'package:smooth_app/query/product_query.dart';
+import 'package:smooth_app/database/local_database.dart';
+import 'package:smooth_app/generic_lib/duration_constants.dart';
 
 Future<bool> uploadCapturedPicture(
   BuildContext context, {
@@ -13,27 +15,22 @@ Future<bool> uploadCapturedPicture(
   required Uri imageUri,
 }) async {
   final AppLocalizations appLocalizations = AppLocalizations.of(context);
-  final SendImage image = SendImage(
-    lang: ProductQuery.getLanguage(),
-    barcode: barcode,
+  final LocalDatabase localDatabase = context.read<LocalDatabase>();
+  await BackgroundTaskImage.addTask(
+    barcode,
     imageField: imageField,
-    imageUri: imageUri,
+    imageFile: File(imageUri.path),
   );
-  final Status? result = await LoadingDialog.run<Status>(
-    context: context,
-    future: OpenFoodAPIClient.addProductImage(
-      ProductQuery.getUser(),
-      image,
+  localDatabase.notifyListeners();
+  // ignore: use_build_context_synchronously
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        appLocalizations.image_upload_queued,
+      ),
+      duration: SnackBarDuration.medium,
     ),
-    title: appLocalizations.uploading_image,
   );
-  if (result == null || result.error != null || result.status != 'status ok') {
-    await LoadingDialog.error(
-      context: context,
-      title: appLocalizations.error_occurred,
-    );
-    return false;
-  }
   //ignore: use_build_context_synchronously
   await _updateContinuousScanModel(context, barcode);
   return true;

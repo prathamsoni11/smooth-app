@@ -13,6 +13,8 @@ import 'package:smooth_app/generic_lib/dialogs/smooth_alert_dialog.dart';
 import 'package:smooth_app/generic_lib/loading_dialog.dart';
 import 'package:smooth_app/helpers/data_importer/product_list_import_export.dart';
 import 'package:smooth_app/helpers/data_importer/smooth_app_data_importer.dart';
+import 'package:smooth_app/pages/offline_data_page.dart';
+import 'package:smooth_app/pages/offline_tasks_page.dart';
 import 'package:smooth_app/pages/onboarding/onboarding_flow_navigator.dart';
 import 'package:smooth_app/pages/preferences/abstract_user_preferences.dart';
 import 'package:smooth_app/pages/preferences/user_preferences_dialog_editor.dart';
@@ -49,6 +51,7 @@ class UserPreferencesDevMode extends AbstractUserPreferences {
   static const String userPreferencesTestEnvHost = '__testEnvHost';
   static const String userPreferencesFlagAdditionalButton =
       '__additionalButtonOnProductPage';
+  static const String userPreferencesFlagNewCropTool = '__newCropTool';
   static const String userPreferencesFlagEditIngredients = '__editIngredients';
   static const String userPreferencesEnumScanMode = '__scanMode';
   static const String userPreferencesAppLanguageCode = '__appLanguage';
@@ -270,6 +273,28 @@ class UserPreferencesDevMode extends AbstractUserPreferences {
         ),
         _dataImporterTile(),
         ListTile(
+          title: Text(appLocalizations.offline_data),
+          onTap: () {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const OfflineDataPage(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          title: const Text('Pending Tasks'),
+          onTap: () {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const OfflineTaskPage(),
+              ),
+            );
+          },
+        ),
+        ListTile(
           title: Text(
             appLocalizations.dev_preferences_import_history_title,
           ),
@@ -356,6 +381,16 @@ class UserPreferencesDevMode extends AbstractUserPreferences {
               list.add(tag);
             }
             await userPreferences.setExcludedAttributeIds(list);
+            setState(() {});
+          },
+        ),
+        SwitchListTile(
+          title: const Text('Use new crop tool'),
+          value:
+              userPreferences.getFlag(userPreferencesFlagNewCropTool) ?? false,
+          onChanged: (bool value) async {
+            await userPreferences.setFlag(
+                userPreferencesFlagNewCropTool, value);
             setState(() {});
           },
         ),

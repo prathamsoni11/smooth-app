@@ -30,6 +30,10 @@
     "@stop": {},
     "finish": "Fertig",
     "@finish": {},
+    "calculate": "Calculate",
+    "@calculate": {
+        "description": "'Calculate' button. Typical use case: the user inputs data then clicks on the 'calculate' button."
+    },
     "reset_food_prefs": "Lebensmittelvorlieben zurücksetzen",
     "@reset": {
         "description": "Button label, clicking on the button will reset user's food preferences."
@@ -339,6 +343,7 @@
         "description": "Button description shown on a product, clicking the button opens a card with unanswered product questions, users can answer these to contribute to Open food facts and gain rewards."
     },
     "question_sign_in_text": "Melden Sie sich bei Ihrem Open Food Facts-Konto an, um ihren Beitrag gutgeschrieben zu bekommen",
+    "tap_to_edit_search": "Antippen Sie, um Suche zu bearbeiten",
     "@Personal preferences": {},
     "myPreferences": "Meine Einstellungen",
     "@myPreferences": {
@@ -704,7 +709,19 @@
     "@consent_analytics_body2": {
         "description": "second paragraph for the consent analytics UI Page"
     },
-    "contact_form_body_android": "OS: Android (SDK Int: {sdkInt} / Release: {release})\nModel: {model}\nProduct: {product}\nDevice: {device}\nBrand:{brand}",
+    "permissions_page_title": "Zugriff auf Kamera",
+    "@permissions_page_title": {
+        "description": "Title for the camera permission's page (onboarding)"
+    },
+    "permissions_page_body1": "Um Strichcodes mit der Kamera Ihres Telefons zu erfassen, autorisieren Sie bitte den Zugriff.",
+    "@permissions_page_body1": {
+        "description": "first paragraph for the camera permission's page (onboarding)"
+    },
+    "permissions_page_body2": "Wenn Sie Ihre Meinung ändern, können Sie diese Option jederzeit in den Einstellungen aktivieren und deaktivieren.",
+    "@permissions_page_body2": {
+        "description": "second paragraph for the camera permission's page (onboarding)"
+    },
+    "contact_form_body_android": "OS: Android (SDK Int: {sdkInt} / Release: {release})\nModell: {model}\nProdukt: {product}\nGerät: {device}\nMarke: {brand}",
     "@contact_form_body_android": {
         "description": "Contact form content for Android devices",
         "placeholders": {
@@ -776,11 +793,15 @@
     },
     "authorize_button_label": "Erlauben",
     "@authorize": {
-        "description": "Button to accept the request of sending the anonymous analytics"
+        "description": "Button to accept the request of sending the anonymous analytics or authorize the camera permission"
     },
     "refuse_button_label": "Ablehnen",
     "@refuse": {
         "description": "Button to decline the request of sending the anonymous analytics"
+    },
+    "ask_me_later_button_label": "Später",
+    "@ask_me_later": {
+        "description": "Button to ignore the camera permission request"
     },
     "knowledge_panel_text_source": "Weiter zu {source_name}",
     "@knowledge_panel_text_source": {
@@ -892,39 +913,11 @@
     "settings_app_app": "Anwendung",
     "settings_app_data": "Datenschutz und Überwachung",
     "settings_app_camera": "Kamera",
+    "settings_app_products": "Produkte",
+    "settings_app_miscellaneous": "Verschiedenes",
     "@camera_settings_title": {
         "description": "Name of the camera section in the settings"
     },
-    "camera_high_resolution_preset_toggle_title": "Hochleistungsmodus",
-    "@camera_high_resolution_preset_toggle_title": {
-        "description": "Title for the Camera high resolution toggle"
-    },
-    "camera_high_resolution_preset_toggle_subtitle": "Wenn diese Option aktiviert ist, sollte die Qualität der Strichcode-Dekodierung besser sein, kann sich aber auf die Leistung und die Lebensdauer der Batterie auswirken. Neustart der Anwendung erforderlich.",
-    "@camera_high_resolution_preset_toggle_subtitle": {
-        "description": "SubTitle for the Camera high resolution toggle"
-    },
-    "camera_focus_point_algorithm_title": "Fokusmodus",
-    "@camera_focus_point_algorithm_title": {
-        "description": "Title for the Camera focus mode (Android only)"
-    },
-    "camera_focus_point_algorithm_subtitle": "Aktueller Modus: {mode}\n{reason}",
-    "@camera_focus_point_algorithm_subtitle": {
-        "description": "SubTitle for the Camera focus mode (Android only)",
-        "placeholders": {
-            "mode": {
-                "type": "String"
-            },
-            "reason": {
-                "type": "String"
-            }
-        }
-    },
-    "camera_focus_point_algorithm_value_auto_label": "Automatisch",
-    "camera_focus_point_algorithm_value_auto_description": "Das System automatisch zwischen schnellem und sicherem Modus wählen lassen.",
-    "camera_focus_point_algorithm_value_new_algorithm_label": "Schneller Modus",
-    "camera_focus_point_algorithm_value_new_algorithm_description": "Ein Modus, der für neuere Geräte empfohlen wird.",
-    "camera_focus_point_algorithm_value_old_algorithm_label": "Abgesicherter Modus",
-    "camera_focus_point_algorithm_value_old_algorithm_description": "Wenn der Schnellmodus nicht funktioniert, sollte dies Ihre Fokusprobleme beheben.",
     "camera_play_sound_title": "Ton beim Einlesen wiedergeben",
     "@camera_play_sound_title": {
         "description": "Title for the Camera play sound toggle"
@@ -932,6 +925,31 @@
     "camera_play_sound_subtitle": "Signalton bei jedem erfolgreichen Scanvorgang",
     "@camera_play_sound_subtitle": {
         "description": "SubTitle for the Camera play sound toggle"
+    },
+    "camera_alternative_mode_title": "Alternativer Scannermodus",
+    "@camera_alternative_mode_title": {
+        "description": "Title for the Alternative mode for the camera/scanner"
+    },
+    "camera_alternative_mode_subtitle": "Wenn Ihr Gerät nicht in der Lage ist, Strichcodes einzulesen, versuchen Sie bitte diesen Modus.\n\nWenn er gut funktioniert, teilen Sie uns bitte Ihren Gerätenamen mit: {device}, damit dieser Modus zum Standard für Ihr Gerät wird.",
+    "@camera_alternative_mode_subtitle": {
+        "description": "SubTitle for the Alternative mode for the camera/scanner",
+        "placeholders": {
+            "device": {
+                "type": "String"
+            }
+        }
+    },
+    "camera_alternative_mode_confirm_dialog_title": "Scanner-Modus geändert!",
+    "@camera_alternative_mode_confirm_dialog_title": {
+        "description": "Title for the dialog explaining the alternative mode has changed"
+    },
+    "app_haptic_feedback_title": "Vibration und haptisches Feedback",
+    "@app_haptic_feedback_title": {
+        "description": "Title for the Haptic feedback toggle"
+    },
+    "app_haptic_feedback_subtitle": "Vibrationen nach der Ausführung einiger Aktionen (Strichcode dekodiert, Produkt entfernt ...).",
+    "@app_haptic_feedback_subtitle": {
+        "description": "SubTitle for the Haptic feedback toggle"
     },
     "crash_reporting_toggle_title": "Abstürze melden",
     "@crash_reporting_toggle_title": {
@@ -1059,7 +1077,7 @@
     "@edit_product_form_item_emb_codes_hint": {
         "description": "Product edition - Traceability Codes - input textfield hint"
     },
-    "edit_product_form_item_emb_codes_explanations": "In Europe, code in an ellipse with the 2 country initials followed by a number and CE.\nExamples: EMB 53062, FR 62.448.034 CE, 84 R 20, 33 RECOLTANT 522",
+    "edit_product_form_item_emb_codes_explanations": "In Europa ist der Code in der Form einer Ellipse mit den beiden Länderinitialen, gefolgt von einer Zahl und CE, anzugeben.\nBeispiele: EMB 53062, FR 62.448.034 CE, 84 R 20, 33 RECOLTANT 522",
     "@edit_product_form_item_emb_codes_examples": {
         "description": "Product edition - EMB Codes - explanations"
     },
@@ -1084,10 +1102,15 @@
         "description": "Product edition - Categories - input explainer, part 3"
     },
     "edit_product_form_item_exit_confirmation": "Möchten Sie Ihre Änderungen speichern, bevor Sie diese Seite verlassen?",
+    "edit_product_form_item_exit_confirmation_positive_button": "Änderungen speichern",
+    "edit_product_form_item_exit_confirmation_negative_button": "Änderungen verwerfen",
     "edit_product_form_item_ingredients_title": "Zutaten und Herkunft",
     "@edit_product_form_item_ingredients_title": {
         "description": "Product edition - Ingredients - Title"
     },
+    "edit_product_form_item_add_valid_item_tooltip": "Hinzufügen",
+    "edit_product_form_item_add_invalid_item_tooltip": "Bitte zuerst einen Text eingeben",
+    "edit_product_form_item_remove_item_tooltip": "Entfernen",
     "edit_product_form_item_packaging_title": "Art der Verpackung",
     "@edit_product_form_item_packaging_title": {
         "description": "Product edition - Packaging - Title"
@@ -1474,9 +1497,27 @@
     "@basic_details_add_error": {
         "description": "Error message when error occurs while submitting basic details"
     },
-    "confirm_clear": "Sie sind dabei, Ihren gesamten Verlauf zu löschen. Möchten Sie dennoch fortfahren?",
+    "confirm_clear": "Sie sind dabei, Ihren gesamten Verlauf zu löschen: Möchten Sie wirklich fortfahren?",
     "@confirm_clear": {
-        "description": "Asking about whether to clear the list or not"
+        "description": "Asking about whether to clear the history list or not"
+    },
+    "confirm_clear_user_list": "Sie sind dabei, diese Liste ({name}) zu leeren: Möchten Sie wirklich fortfahren?",
+    "@confirm_clear_user_list": {
+        "description": "Asking about whether to clear the list or not",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "confirm_delete_user_list": "Sie sind dabei, diese Liste ({name}) zu löschen: Möchten Sie wirklich fortfahren?",
+    "@confirm_delete_user_list": {
+        "description": "Asking about whether to delete the list or not",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
     },
     "importance_label": "{name} Wichtigkeit: {id}",
     "@importance_label": {
@@ -1550,6 +1591,10 @@
     "@choose_from_gallery": {
         "description": "Button label for choosing a photo from gallery"
     },
+    "image_upload_queued": "Das Bild wird so schnell wie möglich im Hintergrund hochgeladen.",
+    "@image_upload_queued": {
+        "description": "Message when a photo is queued for upload"
+    },
     "expand_nutrition_facts": "Nährwerttabelle erweitern",
     "@expand_nutrition_facts": {
         "description": "Label for expanding nutrition facts table in application setting"
@@ -1564,15 +1609,15 @@
     "@no_internet_connection": {
         "description": "Message when there is no internet connection"
     },
-    "world_results_label": "Ergebnisse aus der ganzen Welt",
+    "world_results_label": "Ganze Welt",
     "@world_results_label": {
-        "description": "Label describing the current source of the results: the entire world"
+        "description": "Label describing the current source of the results: the entire world. Keep it short"
     },
-    "world_results_action": "Welt durchsuchen",
+    "world_results_action": "Erweitern Sie die Suche auf die Welt",
     "@world_results_action": {
         "description": "Label for the action button that displays the results from the entire world"
     },
-    "clipboard_barcode_copied": "Strichcode „{barcode}“ in die Zwischenablage kopiert!",
+    "clipboard_barcode_copy": "Strichcode in die Zwischenablage kopieren",
     "@clipboard_barcode_copied": {
         "description": "Snackbar label after clipboard copy",
         "placeholders": {
@@ -1582,6 +1627,7 @@
             }
         }
     },
+    "clipboard_barcode_copied": "Strichcode „{barcode}“ in die Zwischenablage kopiert!",
     "choose_app_language": "Sprache wählen",
     "@choose_app_language": {
         "description": "Choose Application Language"
@@ -1589,5 +1635,48 @@
     "help_with_openfoodfacts": "Hilfe bei OpenFoodFacts",
     "@help_with_openfoodfacts": {
         "description": "Label for the email title"
+    },
+    "product_task_background_schedule": "Das Produkt wird so schnell wie möglich im Hintergrund aktualisiert.",
+    "@product_task_background_schedule": {
+        "description": "Message when a product is scheduled for background update"
+    },
+    "no_email_client_available_dialog_title": "Keine E-Mail-Anwendungen!",
+    "@no_email_client_available_dialog_title": {
+        "description": "Title for the dialog when no email client is installed on the device"
+    },
+    "no_email_client_available_dialog_content": "Bitte senden Sie uns manuell eine E-Mail an contact@openfoodfacts.org",
+    "@no_email_client_available_dialog_content": {
+        "description": "Content for the dialog when no email client is installed on the device"
+    },
+    "all_images": "Alle Fotos",
+    "selected_images": "Ausgewählte Fotos",
+    "product_card_remove_product_tooltip": "Produkt entfernen",
+    "@product_card_remove_product_tooltip": {
+        "description": "Tooltip (message visible with a long-press) on a product item in the carousel"
+    },
+    "portion_calculator_description": "Nährwertangaben für eine bestimmte Menge berechnen",
+    "@portion_calculator_description": {
+        "description": "Sort of title that describes the portion calculator."
+    },
+    "portion_calculator_result_title": "Nutrition facts for {grams} g (or ml)",
+    "@portion_calculator_result_title": {
+        "description": "Title of the results of the portion calculator.",
+        "placeholders": {
+            "grams": {
+                "type": "int"
+            }
+        }
+    },
+    "offline_data": "Offline-Daten",
+    "@offline_data": {
+        "description": "App bar tile for offline data page"
+    },
+    "ocr_image_upload_instruction": "Upload an image to automatically extract the provided information",
+    "@ocr_image_upload_instruction": {
+        "description": "Message shown when there is no image on ocr extraction page"
+    },
+    "upload_image": "Upload Photo",
+    "@upload_image": {
+        "description": "Message shown on asking to upload image"
     }
 }

@@ -16,6 +16,7 @@ import 'package:smooth_app/generic_lib/buttons/smooth_large_button_with_icon.dar
 import 'package:smooth_app/generic_lib/design_constants.dart';
 import 'package:smooth_app/generic_lib/duration_constants.dart';
 import 'package:smooth_app/generic_lib/loading_dialog.dart';
+import 'package:smooth_app/generic_lib/widgets/smooth_back_button.dart';
 import 'package:smooth_app/generic_lib/widgets/smooth_card.dart';
 import 'package:smooth_app/generic_lib/widgets/smooth_error_card.dart';
 import 'package:smooth_app/helpers/analytics_helper.dart';
@@ -23,7 +24,6 @@ import 'package:smooth_app/pages/personalized_ranking_page.dart';
 import 'package:smooth_app/pages/product/common/product_list_item_simple.dart';
 import 'package:smooth_app/pages/product/common/product_query_page_helper.dart';
 import 'package:smooth_app/query/paged_product_query.dart';
-import 'package:smooth_app/themes/constant_icons.dart';
 import 'package:smooth_app/widgets/ranking_floating_action_button.dart';
 import 'package:smooth_app/widgets/smooth_scaffold.dart';
 
@@ -92,20 +92,20 @@ class _ProductQueryPageState extends State<ProductQueryPage>
                 screenSize, themeData, '${_model.loadingError}');
           case LoadingStatus.LOADING:
             if (!_model.isNotEmpty()) {
-              return _getEmptyScreen(
-                screenSize,
-                themeData,
-                const CircularProgressIndicator(),
+              return _EmptyScreen(
+                screenSize: screenSize,
+                name: widget.name,
+                emptiness: const CircularProgressIndicator.adaptive(),
               );
             }
             break;
           case LoadingStatus.LOADED:
             if (!_model.isNotEmpty()) {
               // TODO(monsieurtanuki): should be tracked as well, shouldn't it?
-              return _getEmptyScreen(
-                screenSize,
-                themeData,
-                _getEmptyText(
+              return _EmptyScreen(
+                screenSize: screenSize,
+                name: widget.name,
+                emptiness: _getEmptyText(
                   themeData,
                   appLocalizations.no_product_found,
                 ),
@@ -130,24 +130,6 @@ class _ProductQueryPageState extends State<ProductQueryPage>
       },
     );
   }
-
-  Widget _getEmptyScreen(
-    final Size screenSize,
-    final ThemeData themeData,
-    final Widget emptiness, {
-    final List<Widget>? actions,
-  }) =>
-      SmoothScaffold(
-        appBar: AppBar(
-          backgroundColor: themeData.scaffoldBackgroundColor,
-          leading: const _BackButton(),
-          title: _getAppBarTitle(),
-          actions: actions,
-        ),
-        body: Center(child: emptiness),
-      );
-
-  Widget _getAppBarTitle() => AutoSizeText(widget.name, maxLines: 2);
 
   // TODO(monsieurtanuki): put that in a specific Widget class
   Widget _getNotEmptyScreen(
@@ -205,8 +187,8 @@ class _ProductQueryPageState extends State<ProductQueryPage>
           backgroundColor: themeData.scaffoldBackgroundColor,
           elevation: 0,
           automaticallyImplyLeading: false,
-          leading: const _BackButton(),
-          title: _getAppBarTitle(),
+          leading: const SmoothBackButton(),
+          title: _AppBarTitle(name: widget.name),
           actions: _getAppBarButtons(),
         ),
         body: RefreshIndicator(
@@ -248,10 +230,10 @@ class _ProductQueryPageState extends State<ProductQueryPage>
     final ThemeData themeData,
     final String errorMessage,
   ) {
-    return _getEmptyScreen(
-      screenSize,
-      themeData,
-      Padding(
+    return _EmptyScreen(
+      screenSize: screenSize,
+      name: widget.name,
+      emptiness: Padding(
         padding: const EdgeInsets.all(SMALL_SPACE),
         child: SmoothErrorCard(
           errorMessage: errorMessage,
@@ -428,7 +410,7 @@ class _ProductQueryPageState extends State<ProductQueryPage>
   void _scrollToTop() {
     _scrollController.animateTo(
       0,
-      duration: const Duration(seconds: 3),
+      duration: SnackBarDuration.medium,
       curve: Curves.linear,
     );
   }
@@ -470,18 +452,59 @@ class _ProductQueryPageState extends State<ProductQueryPage>
   }
 }
 
-// TODO(monsieurtanki): put it in a specific Widget class
-class _BackButton extends StatelessWidget {
-  const _BackButton();
+class _EmptyScreen extends StatelessWidget {
+  const _EmptyScreen({
+    required this.screenSize,
+    required this.name,
+    required this.emptiness,
+    this.actions,
+    Key? key,
+  }) : super(key: key);
+
+  final Size screenSize;
+  final String name;
+  final Widget emptiness;
+  final List<Widget>? actions;
 
   @override
-  Widget build(BuildContext context) => IconButton(
-        icon: Icon(ConstantIcons.instance.getBackIcon()),
-        tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-        onPressed: () {
-          Navigator.maybePop(context);
-        },
-      );
+  Widget build(BuildContext context) {
+    return SmoothScaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        leading: const SmoothBackButton(),
+        title: _AppBarTitle(name: name),
+        actions: actions,
+      ),
+      body: Center(child: emptiness),
+    );
+  }
+}
+
+class _AppBarTitle extends StatelessWidget {
+  const _AppBarTitle({
+    required this.name,
+    Key? key,
+  }) : super(key: key);
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations appLocalizations = AppLocalizations.of(context);
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pop(ProductQueryPageResult.editProductQuery);
+      },
+      child: Tooltip(
+        message: appLocalizations.tap_to_edit_search,
+        child: AutoSizeText(
+          name,
+          maxLines: 2,
+        ),
+      ),
+    );
+  }
 }
 
 // TODO(monsieurtanki): put it in a specific reusable class
@@ -495,4 +518,9 @@ class _Action {
   final IconData iconData;
   final String text;
   final VoidCallback onPressed;
+}
+
+enum ProductQueryPageResult {
+  editProductQuery,
+  unknown,
 }

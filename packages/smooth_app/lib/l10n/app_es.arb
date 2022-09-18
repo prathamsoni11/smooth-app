@@ -30,6 +30,10 @@
     "@stop": {},
     "finish": "Finalizar",
     "@finish": {},
+    "calculate": "Calculate",
+    "@calculate": {
+        "description": "'Calculate' button. Typical use case: the user inputs data then clicks on the 'calculate' button."
+    },
     "reset_food_prefs": "Restablecer preferencias de alimentos",
     "@reset": {
         "description": "Button label, clicking on the button will reset user's food preferences."
@@ -339,6 +343,7 @@
         "description": "Button description shown on a product, clicking the button opens a card with unanswered product questions, users can answer these to contribute to Open food facts and gain rewards."
     },
     "question_sign_in_text": "Inicia sesión en tu cuenta de Open Food Facts para obtener crédito por tu contribución",
+    "tap_to_edit_search": "Tocar para editar la búsqueda",
     "@Personal preferences": {},
     "myPreferences": "Mis preferencias",
     "@myPreferences": {
@@ -436,7 +441,7 @@
     "packaging_editing_error": "No se pudo guardar el envase.",
     "packaging_editing_image_error": "No se pudo obtener la nueva imagen del envase.",
     "packaging_editing_title": "Editar el envase",
-    "nutrition": "Información nutricional",
+    "nutrition": "Nutrición",
     "@nutrition": {},
     "nutrition_facts_photo": "Foto de la información nutricional",
     "@nutrition_facts_photo": {
@@ -704,6 +709,18 @@
     "@consent_analytics_body2": {
         "description": "second paragraph for the consent analytics UI Page"
     },
+    "permissions_page_title": "Acceso a la cámara",
+    "@permissions_page_title": {
+        "description": "Title for the camera permission's page (onboarding)"
+    },
+    "permissions_page_body1": "Para escanear códigos de barras con la cámara de su teléfono, por favor autorice su acceso.",
+    "@permissions_page_body1": {
+        "description": "first paragraph for the camera permission's page (onboarding)"
+    },
+    "permissions_page_body2": "Si cambias de opinión, esta opción puede ser activada y desactivada desde la configuración en cualquier momento.",
+    "@permissions_page_body2": {
+        "description": "second paragraph for the camera permission's page (onboarding)"
+    },
     "contact_form_body_android": "SO: Android (SDK Int: {sdkInt} / Release: {release})\nModelo: {model}\nProducto: {product}\nDispositivo: {device}\nMarca:{brand}",
     "@contact_form_body_android": {
         "description": "Contact form content for Android devices",
@@ -776,11 +793,15 @@
     },
     "authorize_button_label": "Autorizar",
     "@authorize": {
-        "description": "Button to accept the request of sending the anonymous analytics"
+        "description": "Button to accept the request of sending the anonymous analytics or authorize the camera permission"
     },
     "refuse_button_label": "Rechazar",
     "@refuse": {
         "description": "Button to decline the request of sending the anonymous analytics"
+    },
+    "ask_me_later_button_label": "Después",
+    "@ask_me_later": {
+        "description": "Button to ignore the camera permission request"
     },
     "knowledge_panel_text_source": "Ve más allá en {source_name}",
     "@knowledge_panel_text_source": {
@@ -892,39 +913,11 @@
     "settings_app_app": "Aplicación",
     "settings_app_data": "Privacidad y monitorización",
     "settings_app_camera": "Cámara",
+    "settings_app_products": "Productos",
+    "settings_app_miscellaneous": "Miscellaneous",
     "@camera_settings_title": {
         "description": "Name of the camera section in the settings"
     },
-    "camera_high_resolution_preset_toggle_title": "Modo de alto rendimiento",
-    "@camera_high_resolution_preset_toggle_title": {
-        "description": "Title for the Camera high resolution toggle"
-    },
-    "camera_high_resolution_preset_toggle_subtitle": "Cuando está activado, la calidad de decodificación de códigos de barras debería ser mejor, pero puede afectar al rendimiento y a la vida de la batería. Requiere reiniciar la aplicación.",
-    "@camera_high_resolution_preset_toggle_subtitle": {
-        "description": "SubTitle for the Camera high resolution toggle"
-    },
-    "camera_focus_point_algorithm_title": "Modo concentración",
-    "@camera_focus_point_algorithm_title": {
-        "description": "Title for the Camera focus mode (Android only)"
-    },
-    "camera_focus_point_algorithm_subtitle": "Modo actual: {mode}\n{reason}",
-    "@camera_focus_point_algorithm_subtitle": {
-        "description": "SubTitle for the Camera focus mode (Android only)",
-        "placeholders": {
-            "mode": {
-                "type": "String"
-            },
-            "reason": {
-                "type": "String"
-            }
-        }
-    },
-    "camera_focus_point_algorithm_value_auto_label": "Automático",
-    "camera_focus_point_algorithm_value_auto_description": "Permite que el sistema elija automáticamente entre modos rápidos y seguros.",
-    "camera_focus_point_algorithm_value_new_algorithm_label": "Modo rápido",
-    "camera_focus_point_algorithm_value_new_algorithm_description": "Modo recomendado para dispositivos recientes.",
-    "camera_focus_point_algorithm_value_old_algorithm_label": "Modo seguro",
-    "camera_focus_point_algorithm_value_old_algorithm_description": "Si el modo rápido no funciona, esto resolverá los problemas de concentración.",
     "camera_play_sound_title": "Reproducir un sonido al escanear",
     "@camera_play_sound_title": {
         "description": "Title for the Camera play sound toggle"
@@ -932,6 +925,31 @@
     "camera_play_sound_subtitle": "Pitará al completar cada escaneo",
     "@camera_play_sound_subtitle": {
         "description": "SubTitle for the Camera play sound toggle"
+    },
+    "camera_alternative_mode_title": "Modo alternativo para el escáner",
+    "@camera_alternative_mode_title": {
+        "description": "Title for the Alternative mode for the camera/scanner"
+    },
+    "camera_alternative_mode_subtitle": "Si su dispositivo no puede escanear códigos de barras, por favor intente este modo.\n\nSi funciona bien, por favor comuníquenos el nombre del dispositivo: {device}, para que este modo sea el predeterminado para su dispositivo.",
+    "@camera_alternative_mode_subtitle": {
+        "description": "SubTitle for the Alternative mode for the camera/scanner",
+        "placeholders": {
+            "device": {
+                "type": "String"
+            }
+        }
+    },
+    "camera_alternative_mode_confirm_dialog_title": "¡El modo de escáner ha cambiado!",
+    "@camera_alternative_mode_confirm_dialog_title": {
+        "description": "Title for the dialog explaining the alternative mode has changed"
+    },
+    "app_haptic_feedback_title": "Vibration & Haptics",
+    "@app_haptic_feedback_title": {
+        "description": "Title for the Haptic feedback toggle"
+    },
+    "app_haptic_feedback_subtitle": "Vibrations after executing some actions (barcode decoded, product removed…).",
+    "@app_haptic_feedback_subtitle": {
+        "description": "SubTitle for the Haptic feedback toggle"
     },
     "crash_reporting_toggle_title": "Informar de fallos",
     "@crash_reporting_toggle_title": {
@@ -1084,10 +1102,15 @@
         "description": "Product edition - Categories - input explainer, part 3"
     },
     "edit_product_form_item_exit_confirmation": "¿Deseas guardar los cambios antes de salir de esta página?",
+    "edit_product_form_item_exit_confirmation_positive_button": "Guardar mis cambios",
+    "edit_product_form_item_exit_confirmation_negative_button": "Ignorar mis cambios",
     "edit_product_form_item_ingredients_title": "Ingredientes y orígenes",
     "@edit_product_form_item_ingredients_title": {
         "description": "Product edition - Ingredients - Title"
     },
+    "edit_product_form_item_add_valid_item_tooltip": "Añadir",
+    "edit_product_form_item_add_invalid_item_tooltip": "Please enter a text first",
+    "edit_product_form_item_remove_item_tooltip": "Remove",
     "edit_product_form_item_packaging_title": "Envase",
     "@edit_product_form_item_packaging_title": {
         "description": "Product edition - Packaging - Title"
@@ -1474,9 +1497,27 @@
     "@basic_details_add_error": {
         "description": "Error message when error occurs while submitting basic details"
     },
-    "confirm_clear": "Estás a punto de eliminar todo tu historial, ¿estás seguro de que quieres continuar?",
+    "confirm_clear": "Está a punto de eliminar todo tu historial, ¿está seguro de que quiere continuar?",
     "@confirm_clear": {
-        "description": "Asking about whether to clear the list or not"
+        "description": "Asking about whether to clear the history list or not"
+    },
+    "confirm_clear_user_list": "Está a punto de borrar esta lista ({name}): ¿está seguro de que desea continuar?",
+    "@confirm_clear_user_list": {
+        "description": "Asking about whether to clear the list or not",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "confirm_delete_user_list": "Está a punto de eliminar esta lista ({name}): ¿está seguro de que quiere continuar?",
+    "@confirm_delete_user_list": {
+        "description": "Asking about whether to delete the list or not",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
     },
     "importance_label": "Importancia {name}: {id}",
     "@importance_label": {
@@ -1550,6 +1591,10 @@
     "@choose_from_gallery": {
         "description": "Button label for choosing a photo from gallery"
     },
+    "image_upload_queued": "La imagen se cargará en segundo plano tan pronto como sea posible.",
+    "@image_upload_queued": {
+        "description": "Message when a photo is queued for upload"
+    },
     "expand_nutrition_facts": "Ampliar tabla de información nutricional",
     "@expand_nutrition_facts": {
         "description": "Label for expanding nutrition facts table in application setting"
@@ -1564,15 +1609,15 @@
     "@no_internet_connection": {
         "description": "Message when there is no internet connection"
     },
-    "world_results_label": "Resultados de todo el mundo",
+    "world_results_label": "Mundo entero",
     "@world_results_label": {
-        "description": "Label describing the current source of the results: the entire world"
+        "description": "Label describing the current source of the results: the entire world. Keep it short"
     },
-    "world_results_action": "Buscar en todo el mundo",
+    "world_results_action": "Amplía tu búsqueda al mundo",
     "@world_results_action": {
         "description": "Label for the action button that displays the results from the entire world"
     },
-    "clipboard_barcode_copied": "¡Código de barras {barcode} copiado al portapapeles!",
+    "clipboard_barcode_copy": "Copiar código de barras al portapapeles",
     "@clipboard_barcode_copied": {
         "description": "Snackbar label after clipboard copy",
         "placeholders": {
@@ -1582,6 +1627,7 @@
             }
         }
     },
+    "clipboard_barcode_copied": "¡Código de barras {barcode} copiado al portapapeles!",
     "choose_app_language": "Elegir idioma de la aplicación",
     "@choose_app_language": {
         "description": "Choose Application Language"
@@ -1589,5 +1635,48 @@
     "help_with_openfoodfacts": "Ayuda con OpenFoodFacts",
     "@help_with_openfoodfacts": {
         "description": "Label for the email title"
+    },
+    "product_task_background_schedule": "El producto se actualizará en segundo plano lo antes posible.",
+    "@product_task_background_schedule": {
+        "description": "Message when a product is scheduled for background update"
+    },
+    "no_email_client_available_dialog_title": "No se encontró ninguna aplicación de correo electrónico!",
+    "@no_email_client_available_dialog_title": {
+        "description": "Title for the dialog when no email client is installed on the device"
+    },
+    "no_email_client_available_dialog_content": "Envíanos manualmente un correo electrónico a contact@openfoodfacts.org",
+    "@no_email_client_available_dialog_content": {
+        "description": "Content for the dialog when no email client is installed on the device"
+    },
+    "all_images": "Todas las imágenes",
+    "selected_images": "Imágenes seleccionadas",
+    "product_card_remove_product_tooltip": "Remove product",
+    "@product_card_remove_product_tooltip": {
+        "description": "Tooltip (message visible with a long-press) on a product item in the carousel"
+    },
+    "portion_calculator_description": "Calcula información nutricional para una cantidad específica",
+    "@portion_calculator_description": {
+        "description": "Sort of title that describes the portion calculator."
+    },
+    "portion_calculator_result_title": "Nutrition facts for {grams} g (or ml)",
+    "@portion_calculator_result_title": {
+        "description": "Title of the results of the portion calculator.",
+        "placeholders": {
+            "grams": {
+                "type": "int"
+            }
+        }
+    },
+    "offline_data": "Datos sin conexión",
+    "@offline_data": {
+        "description": "App bar tile for offline data page"
+    },
+    "ocr_image_upload_instruction": "Upload an image to automatically extract the provided information",
+    "@ocr_image_upload_instruction": {
+        "description": "Message shown when there is no image on ocr extraction page"
+    },
+    "upload_image": "Upload Photo",
+    "@upload_image": {
+        "description": "Message shown on asking to upload image"
     }
 }

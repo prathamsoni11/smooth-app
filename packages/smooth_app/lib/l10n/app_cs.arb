@@ -30,6 +30,10 @@
     "@stop": {},
     "finish": "Dokončit",
     "@finish": {},
+    "calculate": "Calculate",
+    "@calculate": {
+        "description": "'Calculate' button. Typical use case: the user inputs data then clicks on the 'calculate' button."
+    },
     "reset_food_prefs": "Obnovit předvolby jídla",
     "@reset": {
         "description": "Button label, clicking on the button will reset user's food preferences."
@@ -339,6 +343,7 @@
         "description": "Button description shown on a product, clicking the button opens a card with unanswered product questions, users can answer these to contribute to Open food facts and gain rewards."
     },
     "question_sign_in_text": "Přihlaste se ke svému účtu Open Food Facts a získejte kredit za svůj příspěvek",
+    "tap_to_edit_search": "Klepnutím upravíte hledání",
     "@Personal preferences": {},
     "myPreferences": "Moje předvolby",
     "@myPreferences": {
@@ -436,7 +441,7 @@
     "packaging_editing_error": "Balení se nepodařilo uložit.",
     "packaging_editing_image_error": "Nepodařilo se získat nový obrázek obalu.",
     "packaging_editing_title": "Upravit obal",
-    "nutrition": "Výživové údaje",
+    "nutrition": "Nutriční hodnoty",
     "@nutrition": {},
     "nutrition_facts_photo": "Fotografie výživových faktů",
     "@nutrition_facts_photo": {
@@ -704,6 +709,18 @@
     "@consent_analytics_body2": {
         "description": "second paragraph for the consent analytics UI Page"
     },
+    "permissions_page_title": "Přístup k fotoaparátu",
+    "@permissions_page_title": {
+        "description": "Title for the camera permission's page (onboarding)"
+    },
+    "permissions_page_body1": "Chcete-li skenovat čárové kódy fotoaparátem telefonu, autorizujte přístup.",
+    "@permissions_page_body1": {
+        "description": "first paragraph for the camera permission's page (onboarding)"
+    },
+    "permissions_page_body2": "Pokud si to rozmyslíte, můžete tuto možnost kdykoli povolit nebo zakázat v nastavení.",
+    "@permissions_page_body2": {
+        "description": "second paragraph for the camera permission's page (onboarding)"
+    },
     "contact_form_body_android": "OS: Android (SDK Int: {sdkInt} / Release: {release})\nModel: {model}\nProdukt: {product}\nZařízení: {device}\nZnačka:{brand}",
     "@contact_form_body_android": {
         "description": "Contact form content for Android devices",
@@ -752,7 +769,7 @@
             }
         }
     },
-    "contact_form_body": "{osContent}\nApp version:{appVersion}\nApp build number:{appBuildNumber}\nApp package name:{appPackageName}",
+    "contact_form_body": "{osContent}\nVerze aplikace:{appVersion}\nČíslo sestavení aplikace:{appBuildNumber}\nNázev balíčku aplikace:{appPackageName}",
     "@contact_form_body": {
         "description": "Contact form content",
         "placeholders": {
@@ -776,11 +793,15 @@
     },
     "authorize_button_label": "Autorizovat",
     "@authorize": {
-        "description": "Button to accept the request of sending the anonymous analytics"
+        "description": "Button to accept the request of sending the anonymous analytics or authorize the camera permission"
     },
     "refuse_button_label": "Odmítnout",
     "@refuse": {
         "description": "Button to decline the request of sending the anonymous analytics"
+    },
+    "ask_me_later_button_label": "Později",
+    "@ask_me_later": {
+        "description": "Button to ignore the camera permission request"
     },
     "knowledge_panel_text_source": "Přejít dále na {source_name}",
     "@knowledge_panel_text_source": {
@@ -892,39 +913,11 @@
     "settings_app_app": "Aplikace",
     "settings_app_data": "Soukromí a monitorování",
     "settings_app_camera": "Fotoaparát",
+    "settings_app_products": "Produkty",
+    "settings_app_miscellaneous": "Ostatní",
     "@camera_settings_title": {
         "description": "Name of the camera section in the settings"
     },
-    "camera_high_resolution_preset_toggle_title": "Režim vysokého výkonu",
-    "@camera_high_resolution_preset_toggle_title": {
-        "description": "Title for the Camera high resolution toggle"
-    },
-    "camera_high_resolution_preset_toggle_subtitle": "Je-li povoleno, kvalita dekódování čárových kódů by měla být lepší, ale může mít vliv na výkon a výdrž baterie. Vyžaduje restart aplikace.",
-    "@camera_high_resolution_preset_toggle_subtitle": {
-        "description": "SubTitle for the Camera high resolution toggle"
-    },
-    "camera_focus_point_algorithm_title": "Režim zaostření",
-    "@camera_focus_point_algorithm_title": {
-        "description": "Title for the Camera focus mode (Android only)"
-    },
-    "camera_focus_point_algorithm_subtitle": "Aktuální režim: {mode}\n{reason}",
-    "@camera_focus_point_algorithm_subtitle": {
-        "description": "SubTitle for the Camera focus mode (Android only)",
-        "placeholders": {
-            "mode": {
-                "type": "String"
-            },
-            "reason": {
-                "type": "String"
-            }
-        }
-    },
-    "camera_focus_point_algorithm_value_auto_label": "Auto",
-    "camera_focus_point_algorithm_value_auto_description": "Nechte systém automaticky vybrat mezi rychlým a bezpečným režimem.",
-    "camera_focus_point_algorithm_value_new_algorithm_label": "Rychlý režim",
-    "camera_focus_point_algorithm_value_new_algorithm_description": "Režim doporučený pro nedávná zařízení.",
-    "camera_focus_point_algorithm_value_old_algorithm_label": "Bezpečný režim",
-    "camera_focus_point_algorithm_value_old_algorithm_description": "Pokud rychlý režim nefunguje, mělo by to vyřešit vaše problémy se zaměřením.",
     "camera_play_sound_title": "Přehrát zvuk při skenování",
     "@camera_play_sound_title": {
         "description": "Title for the Camera play sound toggle"
@@ -932,6 +925,31 @@
     "camera_play_sound_subtitle": "Při každém úspěšném skenování pípne",
     "@camera_play_sound_subtitle": {
         "description": "SubTitle for the Camera play sound toggle"
+    },
+    "camera_alternative_mode_title": "Alternativní režim pro skener",
+    "@camera_alternative_mode_title": {
+        "description": "Title for the Alternative mode for the camera/scanner"
+    },
+    "camera_alternative_mode_subtitle": "Pokud vaše zařízení nedokáže skenovat čárové kódy, zkuste tento režim.\n\nPokud to funguje dobře, sdělte nám prosím název svého zařízení: {device}, aby se tento režim stal výchozím pro vaše zařízení.",
+    "@camera_alternative_mode_subtitle": {
+        "description": "SubTitle for the Alternative mode for the camera/scanner",
+        "placeholders": {
+            "device": {
+                "type": "String"
+            }
+        }
+    },
+    "camera_alternative_mode_confirm_dialog_title": "Režim skenování byl změněn!",
+    "@camera_alternative_mode_confirm_dialog_title": {
+        "description": "Title for the dialog explaining the alternative mode has changed"
+    },
+    "app_haptic_feedback_title": "Vibrace a haptika",
+    "@app_haptic_feedback_title": {
+        "description": "Title for the Haptic feedback toggle"
+    },
+    "app_haptic_feedback_subtitle": "Vibrace po provedení některých akcí (čárový kód dekódován, produkt odstraněn…).",
+    "@app_haptic_feedback_subtitle": {
+        "description": "SubTitle for the Haptic feedback toggle"
     },
     "crash_reporting_toggle_title": "Hlášení o pádu",
     "@crash_reporting_toggle_title": {
@@ -1084,10 +1102,15 @@
         "description": "Product edition - Categories - input explainer, part 3"
     },
     "edit_product_form_item_exit_confirmation": "Chcete uložit změny před opuštěním této stránky?",
+    "edit_product_form_item_exit_confirmation_positive_button": "Uložit mé změny",
+    "edit_product_form_item_exit_confirmation_negative_button": "Ignorovat mé změny",
     "edit_product_form_item_ingredients_title": "Složení a původ",
     "@edit_product_form_item_ingredients_title": {
         "description": "Product edition - Ingredients - Title"
     },
+    "edit_product_form_item_add_valid_item_tooltip": "Přidat",
+    "edit_product_form_item_add_invalid_item_tooltip": "Nejprve prosím zadejte text",
+    "edit_product_form_item_remove_item_tooltip": "Odstranit",
     "edit_product_form_item_packaging_title": "Obal",
     "@edit_product_form_item_packaging_title": {
         "description": "Product edition - Packaging - Title"
@@ -1474,9 +1497,27 @@
     "@basic_details_add_error": {
         "description": "Error message when error occurs while submitting basic details"
     },
-    "confirm_clear": "Chystáte se smazat celou historii. Opravdu chcete pokračovat?",
+    "confirm_clear": "Chystáte se vymazat celou historii: opravdu chcete pokračovat?",
     "@confirm_clear": {
-        "description": "Asking about whether to clear the list or not"
+        "description": "Asking about whether to clear the history list or not"
+    },
+    "confirm_clear_user_list": "Chystáte se vymazat tento seznam ({name}): opravdu chcete pokračovat?",
+    "@confirm_clear_user_list": {
+        "description": "Asking about whether to clear the list or not",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "confirm_delete_user_list": "Chystáte se smazat tento seznam ({name}): opravdu chcete pokračovat?",
+    "@confirm_delete_user_list": {
+        "description": "Asking about whether to delete the list or not",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
     },
     "importance_label": "{name} důležitosti: {id}",
     "@importance_label": {
@@ -1550,6 +1591,10 @@
     "@choose_from_gallery": {
         "description": "Button label for choosing a photo from gallery"
     },
+    "image_upload_queued": "Obrázek bude nahrán na pozadí co nejdříve.",
+    "@image_upload_queued": {
+        "description": "Message when a photo is queued for upload"
+    },
     "expand_nutrition_facts": "Rozbalte tabulku nutričních údajů",
     "@expand_nutrition_facts": {
         "description": "Label for expanding nutrition facts table in application setting"
@@ -1564,15 +1609,15 @@
     "@no_internet_connection": {
         "description": "Message when there is no internet connection"
     },
-    "world_results_label": "Výsledky z celého světa",
+    "world_results_label": "Celý svět",
     "@world_results_label": {
-        "description": "Label describing the current source of the results: the entire world"
+        "description": "Label describing the current source of the results: the entire world. Keep it short"
     },
-    "world_results_action": "Prohledat celý svět",
+    "world_results_action": "Rozšířit hledání na celý svět",
     "@world_results_action": {
         "description": "Label for the action button that displays the results from the entire world"
     },
-    "clipboard_barcode_copied": "Čárový kód {barcode} zkopírován do schránky!",
+    "clipboard_barcode_copy": "Kopírovat čárový kód do schránky",
     "@clipboard_barcode_copied": {
         "description": "Snackbar label after clipboard copy",
         "placeholders": {
@@ -1582,6 +1627,7 @@
             }
         }
     },
+    "clipboard_barcode_copied": "Čárový kód {barcode} zkopírován do schránky!",
     "choose_app_language": "Vyberte Jazyk aplikace",
     "@choose_app_language": {
         "description": "Choose Application Language"
@@ -1589,5 +1635,48 @@
     "help_with_openfoodfacts": "Pomoc s OpenFoodFacts",
     "@help_with_openfoodfacts": {
         "description": "Label for the email title"
+    },
+    "product_task_background_schedule": "Produkt bude aktualizován na pozadí co nejdříve.",
+    "@product_task_background_schedule": {
+        "description": "Message when a product is scheduled for background update"
+    },
+    "no_email_client_available_dialog_title": "Žádná e-mailová žádost!",
+    "@no_email_client_available_dialog_title": {
+        "description": "Title for the dialog when no email client is installed on the device"
+    },
+    "no_email_client_available_dialog_content": "Pošlete nám prosím ručně e-mail na adresu contact@openfoodfacts.org",
+    "@no_email_client_available_dialog_content": {
+        "description": "Content for the dialog when no email client is installed on the device"
+    },
+    "all_images": "Všechny obrázky",
+    "selected_images": "Vybrané obrázky",
+    "product_card_remove_product_tooltip": "Odstranit produkt",
+    "@product_card_remove_product_tooltip": {
+        "description": "Tooltip (message visible with a long-press) on a product item in the carousel"
+    },
+    "portion_calculator_description": "Vypočítejte nutriční údaje pro konkrétní množství",
+    "@portion_calculator_description": {
+        "description": "Sort of title that describes the portion calculator."
+    },
+    "portion_calculator_result_title": "Nutrition facts for {grams} g (or ml)",
+    "@portion_calculator_result_title": {
+        "description": "Title of the results of the portion calculator.",
+        "placeholders": {
+            "grams": {
+                "type": "int"
+            }
+        }
+    },
+    "offline_data": "Offline data",
+    "@offline_data": {
+        "description": "App bar tile for offline data page"
+    },
+    "ocr_image_upload_instruction": "Upload an image to automatically extract the provided information",
+    "@ocr_image_upload_instruction": {
+        "description": "Message shown when there is no image on ocr extraction page"
+    },
+    "upload_image": "Upload Photo",
+    "@upload_image": {
+        "description": "Message shown on asking to upload image"
     }
 }

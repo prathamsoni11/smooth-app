@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smooth_app/data_models/user_preferences.dart';
 import 'package:smooth_app/generic_lib/duration_constants.dart';
+import 'package:smooth_app/pages/scan/alternative_camera_mode.dart';
 import 'package:smooth_app/services/smooth_services.dart';
 
 /// A lifecycle-aware [CameraController]
@@ -42,18 +43,19 @@ class SmoothCameraController extends CameraController {
   /// Listen to camera error events
   StreamSubscription<CameraErrorEvent>? _errorListener;
 
-  // Last focus point position
+  /// Last focus point position
   Offset? _focusPoint;
 
-  // Focus point algorithm (for Android only)
-  CameraFocusPointAlgorithm? _algorithm;
+  /// Does the camera use the alternative mode (file based implementation)?
+  /// Enabled to [false] by default, as [changeImageMode] can be called, even if
+  /// [init] wasn't called before.
+  bool _persistToFileMode = false;
 
   Future<void> init({
     required FocusMode focusMode,
     required Offset focusPoint,
     required DeviceOrientation deviceOrientation,
     required onLatestImageAvailable onAvailable,
-    CameraFocusPointAlgorithm? algorithm,
     bool? enableTorch,
   }) async {
     if (!isInitialized) {
@@ -62,12 +64,9 @@ class SmoothCameraController extends CameraController {
       await initialize();
       await setFocusMode(focusMode);
       await setExposurePoint(focusPoint);
-      await setFocusPointTo(
-        focusPoint,
-        algorithm ?? CameraFocusPointAlgorithm.auto,
-      );
+      await setFocusPointTo(focusPoint);
       await lockCaptureOrientation(deviceOrientation);
-      await startImageStream(onAvailable);
+      await startStream(onAvailable);
       await enableFlash(enableTorch ?? preferences.useFlashWithCamera);
       _updateState(_CameraState.initialized);
       _hasAPendingResume = false;
@@ -97,11 +96,58 @@ class SmoothCameraController extends CameraController {
   @override
   Future<void> initialize() => super.initialize();
 
+  @protected
+  Future<void> startStream(onLatestImageAvailable onAvailable) async {
+    _persistToFileMode = preferences.useAlternativeCameraMode ??
+        await AlternativeCameraMode.isAWhitelistedDevice;
+
+    return startImageStream(
+      onAvailable,
+      persistToFile: _persistToFileMode,
+    );
+  }
+
+  Future<void> reloadImageMode() async {
+    final bool? alternativeCameraMode = preferences.useAlternativeCameraMode;
+
+    /// Keep using the default value
+    if (alternativeCameraMode == null) {
+      return;
+    }
+
+    if (alternativeCameraMode != _persistToFileMode) {
+      _persistToFileMode = alternativeCameraMode;
+      await changeImageMode(_persistToFileMode);
+    }
+  }
+
+  /// Never use this method directly, use [reloadImageMode] instead
+  @protected
   @override
-  Future<void> startImageStream(onLatestImageAvailable onAvailable) {
-    final Future<void> startImageStreamResult =
-        super.startImageStream(onAvailable);
-    Logs.d(tag: 'CameraController', 'Image stream started');
+  Future<bool> changeImageMode(bool persistToFile) {
+    return super.changeImageMode(persistToFile);
+  }
+
+  /// Never use this method directly, by through [startStream]
+  /// [persistToFile] is what we call the "alternative" mode
+  @protected
+  @override
+  Future<void> startImageStream(
+    onLatestImageAvailable onAvailable, {
+    bool persistToFile = false,
+  }) {
+    final Future<void> startImageStreamResult = super.startImageStream(
+      onAvailable,
+      persistToFile: persistToFile,
+    );
+
+    Logs.d(
+      tag: 'CameraController',
+      persistToFile
+          ? 'Image stream started with files'
+          : 'Image stream started with camera stream',
+    );
+
     return startImageStreamResult;
   }
 
@@ -209,14 +255,11 @@ class SmoothCameraController extends CameraController {
 
   Future<void> setFocusPointTo(
     Offset? point,
-    CameraFocusPointAlgorithm? algorithm,
   ) async {
     await setExposurePoint(point);
-
-    _algorithm = algorithm;
     await setFocusPoint(
       point,
-      (_algorithm ?? CameraFocusPointAlgorithm.auto).mode,
+      FocusPointMode.auto,
     );
     _focusPoint = point;
   }
@@ -242,20 +285,12 @@ class SmoothCameraController extends CameraController {
 
   /// Force the focus to the latest call to [setFocusPoint].
   Future<void> refocus() async {
-    return setFocusPoint(_focusPoint, _algorithm!.mode);
+    return setFocusPoint(_focusPoint, FocusPointMode.auto);
   }
 
-  Future<void> updateFocusPointAlgorithm(
-    CameraFocusPointAlgorithm cameraFocusPointAlgorithm,
-  ) async {
-    if (_algorithm != cameraFocusPointAlgorithm) {
-      // If the app is running, make the change immediately
-      if (isInitialized && _state == _CameraState.resumed) {
-        return setFocusPointTo(_focusPoint, _algorithm);
-      } else {
-        // The update will be done, once the preview is resumed
-        _algorithm = cameraFocusPointAlgorithm;
-      }
+  Future<void> forceFocus() async {
+    if (isInitialized && _state == _CameraState.resumed) {
+      return setFocusPointTo(_focusPoint);
     }
   }
 
@@ -332,27 +367,4 @@ enum _CameraState {
   stopped,
   isBeingDisposed,
   disposed,
-}
-
-/// Custom algorithm for the focus point to fix issues with Android
-/// On iOS, modes will simply be ignored
-enum CameraFocusPointAlgorithm {
-  // Let the native part decide between [newAlgorithm] and [oldAlgorithm]
-  auto,
-  // Quicker algorithm, but may not work on old / Samsung devices
-  newAlgorithm,
-  // Old algorithm, which let more time between each focuses
-  oldAlgorithm;
-
-  FocusPointMode get mode {
-    switch (this) {
-      case CameraFocusPointAlgorithm.newAlgorithm:
-        return FocusPointMode.newAlgorithm;
-      case CameraFocusPointAlgorithm.oldAlgorithm:
-        return FocusPointMode.oldAlgorithm;
-      case CameraFocusPointAlgorithm.auto:
-      default:
-        return FocusPointMode.auto;
-    }
-  }
 }

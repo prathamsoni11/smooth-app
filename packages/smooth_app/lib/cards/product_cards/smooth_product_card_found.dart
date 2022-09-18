@@ -62,9 +62,9 @@ class SmoothProductCardFound extends StatelessWidget {
       borderRadius: ROUNDED_BORDER_RADIUS,
       onTap: onTap ??
           () async {
-            await Navigator.push<Widget>(
+            await Navigator.push<void>(
               context,
-              MaterialPageRoute<Widget>(
+              MaterialPageRoute<void>(
                 builder: (BuildContext context) => ProductPage(product),
               ),
             );
@@ -86,7 +86,7 @@ class SmoothProductCardFound extends StatelessWidget {
             padding: const EdgeInsets.all(VERY_SMALL_SPACE),
             child: Row(
               children: <Widget>[
-                SmoothProductImage(
+                SmoothMainProductImage(
                   product: product,
                   width: screenSize.width * 0.20,
                   height: screenSize.width * 0.20,

@@ -25,6 +25,7 @@ class ReinventionPage extends StatelessWidget {
 
     return SmoothScaffold(
       backgroundColor: backgroundColor,
+      brightness: Brightness.dark,
       body: SafeArea(
         child: Stack(
           children: <Widget>[
@@ -85,6 +86,7 @@ class ReinventionPage extends StatelessWidget {
               child: NextButton(
                 OnboardingPage.REINVENTION,
                 backgroundColor: null,
+                nextKey: Key('nextAfterReinvention'),
               ),
             ),
           ],
