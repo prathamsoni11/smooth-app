@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -72,7 +71,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  final AppLocalizations appLocalizations = AppLocalizations.of(context);
+  final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
   final TextStyle headlineStyle =
       Theme.of(context).textTheme.headline2!.apply(color: Colors.white);
   final TextStyle bodyTextStyle =
@@ -81,77 +80,68 @@ Widget build(BuildContext context) {
   final double sidePadding = MediaQuery.of(context).size.width * .08;
 
   return Scaffold(
-    body: Column(children: &lt;Widget&gt;[
-      Expanded(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: sidePadding,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: &lt;Widget&gt;[
-              const Spacer(flex: 1),
-              Flexible(
-                flex: 4,
-                child: Text(
-                  appLocalizations.whatIsOff,
-                  style: headlineStyle,
-                ),
+    body: Stack(children: &lt;Widget&gt;[
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: sidePadding,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: &lt;Widget&gt;[
+            const Spacer(flex: 1),
+            Flexible(
+              flex: 4,
+              child: Text(appLocalizations.whatIsOff, style: headlineStyle),
+            ),
+            Flexible(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: &lt;Widget&gt;[
+                  Padding(
+                    padding: const EdgeInsets.only(left: SMALL_SPACE),
+                    child: Text(
+                      appLocalizations.country_chooser_label,
+                      style: bodyTextStyle,
+                    ),
+                  ),
+                  CountrySelector(
+                    initialCountryCode: WidgetsBinding
+                        .instance?.window.locale.countryCode
+                        ?.toLowerCase(),
+                    padding: const EdgeInsets.only(
+                      top: MEDIUM_SPACE,
+                      bottom: LARGE_SPACE,
+                    ),
+                    inputDecoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 235, 235, 235)),
+                        borderRadius: BorderRadius.circular(VERY_LARGE_SPACE),
+                      ),
+                      filled: Theme.of(context).colorScheme.brightness ==
+                          Brightness.light,
+                      fillColor: const Color.fromARGB(255, 235, 235, 235),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: SMALL_SPACE),
+                    child: Text(
+                      appLocalizations.country_selection_explanation,
+                      style: bodyTextStyle,
+                    ),
+                  ),
+                ],
               ),
-              Flexible(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: &lt;Widget&gt;[
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: SMALL_SPACE,
-                      ),
-                      child: Text(
-                        appLocalizations.country_chooser_label,
-                        style: bodyTextStyle,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          LARGE_SPACE,
-                        ),
-                        color: Theme.of(context).cardColor,
-                      ),
-                      margin:
-                          const EdgeInsets.symmetric(vertical: MEDIUM_SPACE),
-                      child: CountrySelector(
-                        initialCountryCode: WidgetsBinding
-                            .instance.window.locale.countryCode
-                            ?.toLowerCase(),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: SMALL_SPACE,
-                        bottom: VERY_SMALL_SPACE,
-                      ),
-                      child: Text(
-                        appLocalizations.country_selection_explanation,
-                        style: bodyTextStyle,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-      const Align(
-        alignment: Alignment.bottomCenter,
-        child: NextButton(OnboardingPage.WELCOME),
+      const Positioned(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: NextButton(OnboardingPage.WELCOME),
+        ),
       ),
     ]),
     backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -180,8 +170,8 @@ Widget build(BuildContext context) {
     <h5>WelcomePage class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_welcome_page/WelcomePage-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_welcome_page/WelcomePage/WelcomePage.html">WelcomePage</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_welcome_page/WelcomePage-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_welcome_page/WelcomePage/WelcomePage.html">WelcomePage</a></li>
 
 
     <li class="section-title inherited">
@@ -222,7 +212,7 @@ Widget build(BuildContext context) {
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

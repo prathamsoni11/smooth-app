@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the PersonalizedRankingPage constructor from the Class PersonalizedRankingPage class from the personalized_ranking_page library, for the Dart programming language.">
-  <title>PersonalizedRankingPage constructor - PersonalizedRankingPage class - personalized_ranking_page library - Dart API</title>
+  <meta name="description" content="API docs for the PersonalizedRankingPage constructor from Class PersonalizedRankingPage from the personalized_ranking_page library, for the Dart programming language.">
+  <title>PersonalizedRankingPage constructor - PersonalizedRankingPage - personalized_ranking_page library - Dart API</title>
 
 
   
@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -32,7 +31,7 @@
     <li><a href="../../index.html">smooth_app</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page-library.html">personalized_ranking_page</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/PersonalizedRankingPage-class.html">PersonalizedRankingPage</a></li>
-    <li class="self-crumb">PersonalizedRankingPage const constructor</li>
+    <li class="self-crumb">PersonalizedRankingPage constructor</li>
   </ol>
   <div class="self-name">PersonalizedRankingPage</div>
   <form class="search navbar-right" role="search">
@@ -49,8 +48,8 @@
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
-    <section class="multi-line-signature">const
-      <span class="name ">PersonalizedRankingPage</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-products">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a></span> <span class="parameter-name">products</span>, </span></li>
+    <section class="multi-line-signature">
+      <span class="name ">PersonalizedRankingPage</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-productList">{<span>required</span> <span class="type-annotation">dynamic</span> <span class="parameter-name">productList</span>, </span></li>
 <li><span class="parameter" id="-param-title"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">title</span>}</span></li>
 </ol>)
     </section>
@@ -61,10 +60,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const PersonalizedRankingPage({
-  required this.products,
+  <pre class="language-dart"><code class="language-dart">PersonalizedRankingPage({
+  required final ProductList productList,
   required this.title,
-});</code></pre>
+}) : products = productList.getList();</code></pre>
 </section>
 
 
@@ -81,15 +80,16 @@
   <li><a href="../../index.html">smooth_app</a></li>
   <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page-library.html">personalized_ranking_page</a></li>
   <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/PersonalizedRankingPage-class.html">PersonalizedRankingPage</a></li>
-  <li class="self-crumb">PersonalizedRankingPage const constructor</li>
+  <li class="self-crumb">PersonalizedRankingPage constructor</li>
 </ol>
 
 
     <h5>PersonalizedRankingPage class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/PersonalizedRankingPage-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/PersonalizedRankingPage/PersonalizedRankingPage.html">PersonalizedRankingPage</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/PersonalizedRankingPage-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/PersonalizedRankingPage/PersonalizedRankingPage.html">PersonalizedRankingPage</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_personalized_ranking_page/PersonalizedRankingPage/PersonalizedRankingPage.fromItems.html">fromItems</a></li>
 
 
     <li class="section-title">
@@ -132,7 +132,7 @@
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

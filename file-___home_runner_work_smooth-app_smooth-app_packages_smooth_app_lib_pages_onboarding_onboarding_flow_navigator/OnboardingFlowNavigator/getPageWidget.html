@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -84,11 +83,8 @@
     case OnboardingPage.PREFERENCES_PAGE:
       return _wrapWidgetInCustomBackNavigator(
           context, page, PreferencesPage(localDatabase));
-    case OnboardingPage.CONSENT_PAGE:
-      return _wrapWidgetInCustomBackNavigator(
-          context, page, const ConsentAnalytics());
     case OnboardingPage.ONBOARDING_COMPLETE:
-      return InheritedDataManager(child: PageManager());
+      return PageManager();
   }
 }</code></pre>
 </section>
@@ -114,8 +110,8 @@
     <h5>OnboardingFlowNavigator class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/OnboardingFlowNavigator.html">OnboardingFlowNavigator</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/OnboardingFlowNavigator.html">OnboardingFlowNavigator</a></li>
 
 
     <li class="section-title inherited">
@@ -135,9 +131,8 @@
 
 
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator-class.html#static-methods">Static methods</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/getNextPage.html">getNextPage</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/isOnboradingPagedInHistory.html">isOnboradingPagedInHistory</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator-class.html#static-methods">Static methods</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/getNextPage.html">getNextPage</a></li>
 
 </ol>
 
@@ -160,7 +155,7 @@
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

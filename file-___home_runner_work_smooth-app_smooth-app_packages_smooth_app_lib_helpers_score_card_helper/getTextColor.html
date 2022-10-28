@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../"
-      data-using-base-href="false">
+<body data-base-href="../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -66,17 +65,17 @@
   <pre class="language-dart"><code class="language-dart">Color getTextColor(CardEvaluation evaluation) {
   switch (evaluation) {
     case CardEvaluation.UNKNOWN:
-      return PRIMARY_GREY_COLOR;
+      return const Color.fromARGB(1, 75, 75, 75);
     case CardEvaluation.VERY_BAD:
-      return RED_COLOR;
+      return const Color.fromARGB(1, 235, 87, 87);
     case CardEvaluation.BAD:
-      return LIGHT_ORANGE_COLOR;
+      return const Color.fromARGB(1, 242, 153, 74);
     case CardEvaluation.NEUTRAL:
-      return DARK_YELLOW_COLOR;
+      return const Color.fromARGB(255, 149, 116, 0);
     case CardEvaluation.GOOD:
-      return LIGHT_GREEN_COLOR;
+      return const Color.fromARGB(1, 133, 187, 47);
     case CardEvaluation.VERY_GOOD:
-      return DARK_GREEN_COLOR;
+      return const Color.fromARGB(1, 3, 129, 65);
   }
 }</code></pre>
 </section>
@@ -135,7 +134,7 @@
 
 
 <script src="../static-assets/highlight.pack.js?v1"></script>
-<script src="../static-assets/script.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
 
 
 

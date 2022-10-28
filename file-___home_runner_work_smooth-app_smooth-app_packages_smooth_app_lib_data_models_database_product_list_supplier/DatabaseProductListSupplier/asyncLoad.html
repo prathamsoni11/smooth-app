@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -64,9 +63,6 @@
 
     </section>
     
-<section class="desc markdown">
-  <p>Loads all results page after page.</p>
-</section>
 
 
     
@@ -75,28 +71,10 @@
   <pre class="language-dart"><code class="language-dart">@override
 Future&lt;String?&gt; asyncLoad() async {
   try {
-    &#47;&#47; we start from page 1
-    ProductList productList = productQuery.getProductList();
-    bool first = true;
-    do {
-      &#47;&#47; we try to get the locally saved data for the current page
-      await DaoProductList(localDatabase).get(productList);
-      if (productList.barcodes.isEmpty) {
-        &#47;&#47; we found nothing
-        if (first) {
-          &#47;&#47; we save an empty list
-          partialProductList.add(productList);
-        }
-        &#47;&#47; that&#39;s it, we&#39;ve just loaded all the non-empty pages we could
-        return null;
-      }
-      &#47;&#47; we found something: let&#39;s add it to the partial product list
-      partialProductList.add(productList);
-      &#47;&#47; and try again with the next page
-      productQuery.toNextPage();
-      productList = productQuery.getProductList();
-      first = false;
-    } while (true);
+    final ProductList loadedProductList = productQuery.getProductList();
+    await DaoProductList(localDatabase).get(loadedProductList);
+    productList = loadedProductList;
+    return null;
   } catch (e) {
     return e.toString();
   }
@@ -124,8 +102,8 @@ Future&lt;String?&gt; asyncLoad() async {
     <h5>DatabaseProductListSupplier class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_database_product_list_supplier/DatabaseProductListSupplier-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_database_product_list_supplier/DatabaseProductListSupplier/DatabaseProductListSupplier.html">DatabaseProductListSupplier</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_database_product_list_supplier/DatabaseProductListSupplier-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_database_product_list_supplier/DatabaseProductListSupplier/DatabaseProductListSupplier.html">DatabaseProductListSupplier</a></li>
 
 
     <li class="section-title inherited">
@@ -167,7 +145,7 @@ Future&lt;String?&gt; asyncLoad() async {
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

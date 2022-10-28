@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -66,22 +65,15 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; resetImportances() async {
   await clearImportances(notifyListeners: false);
-  if (attributeGroups != null) {
-    for (final AttributeGroup attributeGroup in attributeGroups!) {
-      if (attributeGroup.attributes != null) {
-        for (final Attribute attribute in attributeGroup.attributes!) {
-          final String? defaultF = attribute.defaultF;
-          if (attribute.id != null &amp;&amp; defaultF != null) {
-            await setImportance(
-              attribute.id!,
-              defaultF,
-              notifyListeners: false,
-            );
-          }
-        }
-      }
-    }
-  }
+  await Future.wait(
+    _DEFAULT_ATTRIBUTES.map(
+      (String attributeId) =&gt; setImportance(
+        attributeId,
+        PreferenceImportance.ID_IMPORTANT,
+        notifyListeners: false,
+      ),
+    ),
+  );
   notify();
 }</code></pre>
 </section>
@@ -107,8 +99,8 @@
     <h5>ProductPreferences class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_product_preferences/ProductPreferences-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_product_preferences/ProductPreferences/ProductPreferences.html">ProductPreferences</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_product_preferences/ProductPreferences-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_product_preferences/ProductPreferences/ProductPreferences.html">ProductPreferences</a></li>
 
 
     <li class="section-title">
@@ -154,7 +146,7 @@
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

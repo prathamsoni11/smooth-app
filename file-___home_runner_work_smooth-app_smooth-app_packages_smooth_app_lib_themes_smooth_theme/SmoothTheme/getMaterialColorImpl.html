@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -53,7 +52,7 @@
       
 
 <span class="returntype">dynamic</span>
-<span class="name ">getMaterialColorImpl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getMaterialColorImpl-param-context"><span class="type-annotation">dynamic</span> <span class="parameter-name">context</span></span></li>
+<span class="name ">getMaterialColorImpl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getMaterialColorImpl-param-themeProvider"><span class="type-annotation">dynamic</span> <span class="parameter-name">themeProvider</span></span></li>
 </ol>)
 
       
@@ -66,9 +65,8 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@protected
-MaterialColor getMaterialColorImpl(final BuildContext context) {
-  final ThemeProvider themeProvider = context.watch&lt;ThemeProvider&gt;();
-  if (MediaQuery.platformBrightnessOf(context) == Brightness.dark) {
+MaterialColor getMaterialColorImpl(final ThemeProvider themeProvider) {
+  if (themeProvider.darkTheme) {
     return Colors.grey;
   }
   return MATERIAL_COLORS[themeProvider.colorTag] ??
@@ -97,8 +95,8 @@ MaterialColor getMaterialColorImpl(final BuildContext context) {
     <h5>SmoothTheme class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/SmoothTheme.html">SmoothTheme</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/SmoothTheme.html">SmoothTheme</a></li>
 
 
     <li class="section-title inherited">
@@ -117,20 +115,20 @@ MaterialColor getMaterialColorImpl(final BuildContext context) {
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#static-properties">Static properties</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/instance.html">instance</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#static-properties">Static properties</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/instance.html">instance</a></li>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#static-methods">Static methods</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/getColor.html">getColor</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/getMaterialColor.html">getMaterialColor</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/getThemeData.html">getThemeData</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#static-methods">Static methods</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/getColor.html">getColor</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/getMaterialColor.html">getMaterialColor</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/getThemeData.html">getThemeData</a></li>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#constants">Constants</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/ADDITIONAL_OPACITY_FOR_DARK-constant.html">ADDITIONAL_OPACITY_FOR_DARK</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/COLOR_TAG_BLUE-constant.html">COLOR_TAG_BLUE</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/COLOR_TAG_BROWN-constant.html">COLOR_TAG_BROWN</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/COLOR_TAG_GREEN-constant.html">COLOR_TAG_GREEN</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/MATERIAL_COLORS-constant.html">MATERIAL_COLORS</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme-class.html#constants">Constants</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/ADDITIONAL_OPACITY_FOR_DARK-constant.html">ADDITIONAL_OPACITY_FOR_DARK</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/COLOR_TAG_BLUE-constant.html">COLOR_TAG_BLUE</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/COLOR_TAG_BROWN-constant.html">COLOR_TAG_BROWN</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/COLOR_TAG_GREEN-constant.html">COLOR_TAG_GREEN</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_themes_smooth_theme/SmoothTheme/MATERIAL_COLORS-constant.html">MATERIAL_COLORS</a></li>
 </ol>
 
   </div><!--/.sidebar-offcanvas-->
@@ -152,7 +150,7 @@ MaterialColor getMaterialColorImpl(final BuildContext context) {
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

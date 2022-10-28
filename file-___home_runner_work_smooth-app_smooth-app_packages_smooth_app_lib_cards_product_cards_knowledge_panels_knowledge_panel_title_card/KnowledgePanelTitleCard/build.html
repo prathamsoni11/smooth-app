@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -74,12 +73,13 @@
 Widget build(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
   Color? colorFromEvaluation;
-  if (knowledgePanelTitleElement.iconColorFromEvaluation ?? false) {
-    if (themeData.brightness == Brightness.dark) {
-      colorFromEvaluation = _getColorFromEvaluationDarkMode(evaluation);
-    } else {
-      colorFromEvaluation = _getColorFromEvaluation(evaluation);
-    }
+  if (evaluation != null &amp;&amp;
+      (knowledgePanelTitleElement.iconColorFromEvaluation ?? false)) {
+    colorFromEvaluation = _getColorFromEvaluation(evaluation!);
+  }
+  if (colorFromEvaluation == null &amp;&amp;
+      themeData.brightness == Brightness.dark) {
+    colorFromEvaluation = Colors.white;
   }
   List&lt;Widget&gt; iconWidget;
   if (knowledgePanelTitleElement.iconUrl != null) {
@@ -101,17 +101,14 @@ Widget build(BuildContext context) {
     iconWidget = &lt;Widget&gt;[];
   }
   return Padding(
-    padding: const EdgeInsets.only(
-      top: VERY_SMALL_SPACE,
-      bottom: VERY_SMALL_SPACE,
-    ),
+    padding: const EdgeInsets.only(top: SMALL_SPACE),
     child: Row(
       children: &lt;Widget&gt;[
         ...iconWidget,
         Expanded(
-          flex: IconWidgetSizer.getRemainingWidgetFlex(),
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
+            flex: IconWidgetSizer.getRemainingWidgetFlex(),
+            child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
               return Wrap(
                 direction: Axis.vertical,
                 children: &lt;Widget&gt;[
@@ -125,17 +122,11 @@ Widget build(BuildContext context) {
                   if (knowledgePanelTitleElement.subtitle != null)
                     SizedBox(
                       width: constraints.maxWidth,
-                      child: Text(knowledgePanelTitleElement.subtitle!)
-                          .selectable(),
+                      child: Text(knowledgePanelTitleElement.subtitle!),
                     ),
                 ],
               );
-            },
-          ),
-        ),
-        const Icon(
-          Icons.keyboard_arrow_down_outlined,
-        ),
+            })),
       ],
     ),
   );
@@ -163,8 +154,8 @@ Widget build(BuildContext context) {
     <h5>KnowledgePanelTitleCard class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_cards_product_cards_knowledge_panels_knowledge_panel_title_card/KnowledgePanelTitleCard-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_cards_product_cards_knowledge_panels_knowledge_panel_title_card/KnowledgePanelTitleCard/KnowledgePanelTitleCard.html">KnowledgePanelTitleCard</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_cards_product_cards_knowledge_panels_knowledge_panel_title_card/KnowledgePanelTitleCard-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_cards_product_cards_knowledge_panels_knowledge_panel_title_card/KnowledgePanelTitleCard/KnowledgePanelTitleCard.html">KnowledgePanelTitleCard</a></li>
 
 
     <li class="section-title">
@@ -207,7 +198,7 @@ Widget build(BuildContext context) {
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

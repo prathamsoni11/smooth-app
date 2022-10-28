@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../../"
-      data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -72,14 +71,10 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  &#47;&#47; [_startLiveFeed] is called both with [onResume] and [onPause] to cover
-  &#47;&#47; all entry points
+  _model = context.watch&lt;ContinuousScanModel&gt;();
   return LifeCycleManager(
-    onStart: _startLiveFeed,
-    onResume: _onResumeImageStream,
-    onVisible: () =&gt; _onResumeImageStream(forceStartPreview: true),
-    onPause: _onPauseImageStream,
-    onInvisible: _onPauseImageStream,
+    onResume: _startLiveFeed,
+    onPause: _stopImageStream,
     child: _buildScannerWidget(),
   );
 }</code></pre>
@@ -106,21 +101,23 @@ Widget build(BuildContext context) {
     <h5>MLKitScannerPageState class</h5>
     <ol>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState-class.html#constructors">Constructors</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/MLKitScannerPageState.html">MLKitScannerPageState</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/MLKitScannerPageState.html">MLKitScannerPageState</a></li>
 
 
     <li class="section-title">
       <a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState-class.html#instance-properties">Properties</a>
     </li>
+    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/barcodeScanner.html">barcodeScanner</a></li>
+    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/cameraLensDirection.html">cameraLensDirection</a></li>
+    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/frameCounter.html">frameCounter</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/isCameraInitialized.html">isCameraInitialized</a></li>
+    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/isBusy.html">isBusy</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/stoppingCamera.html">stoppingCamera</a></li>
 
     <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState-class.html#instance-methods">Methods</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/build.html">build</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/didChangeDependencies.html">didChangeDependencies</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/dispose.html">dispose</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/initState.html">initState</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
@@ -132,8 +129,6 @@ Widget build(BuildContext context) {
 
 
 
-    <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState-class.html#constants">Constants</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_scan_ml_kit_scan_page/MLKitScannerPageState/postFrameCallbackStandardDelay-constant.html">postFrameCallbackStandardDelay</a></li>
 </ol>
 
   </div><!--/.sidebar-offcanvas-->
@@ -155,7 +150,7 @@ Widget build(BuildContext context) {
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
-<script src="../../static-assets/script.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
 
 
 

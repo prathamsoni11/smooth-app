@@ -21,8 +21,7 @@
 </head>
 
 
-<body data-base-href="../"
-      data-using-base-href="false">
+<body data-base-href="../" data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -80,13 +79,8 @@
   return SmoothCard(
     margin: margin,
     padding: padding,
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: &lt;Widget&gt;[
-        if (header != null) header,
-        body,
-      ],
-    ),
+    header: header,
+    child: body,
   );
 }</code></pre>
 </section>
@@ -146,7 +140,7 @@
 
 
 <script src="../static-assets/highlight.pack.js?v1"></script>
-<script src="../static-assets/script.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
 
 
 
