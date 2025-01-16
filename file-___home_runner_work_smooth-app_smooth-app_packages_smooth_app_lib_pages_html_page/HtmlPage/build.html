@@ -70,8 +70,8 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-Widget build(BuildContext context) =&gt; Scaffold(
-      appBar: AppBar(title: Text(pageTitle)),
+Widget build(BuildContext context) =&gt; SmoothScaffold(
+      appBar: SmoothAppBar(title: Text(pageTitle)),
       body: SingleChildScrollView(child: SmoothHtmlWidget(htmlString)),
     );</code></pre>
 </section>
@@ -132,7 +132,7 @@ Widget build(BuildContext context) =&gt; Scaffold(
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

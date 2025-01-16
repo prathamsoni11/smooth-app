@@ -71,10 +71,11 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  final String? fullFilename = getFullFilename();
-  if (fullFilename == null) {
+  final List&lt;String&gt; fullFilenames = getCachedFilenames();
+  if (fullFilenames.isEmpty) {
     return getDefaultUnknown();
   }
+
   return Image.network(
     iconUrl!,
     width: width,
@@ -88,11 +89,14 @@ Widget build(BuildContext context) {
       if (loadingProgress == null) {
         return child;
       }
-      return displayAssetWhileWaiting
-          ? RasterAsyncAsset(fullFilename, iconUrl!,
-              width: width, height: height)
-          : getCircularProgressIndicator();
+      return _localAssetWidget(fullFilenames);
     },
+    errorBuilder: (
+      final BuildContext context,
+      final Object error,
+      final StackTrace? stackTrace,
+    ) =&gt;
+        _localAssetWidget(fullFilenames),
   );
 }</code></pre>
 </section>
@@ -151,7 +155,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

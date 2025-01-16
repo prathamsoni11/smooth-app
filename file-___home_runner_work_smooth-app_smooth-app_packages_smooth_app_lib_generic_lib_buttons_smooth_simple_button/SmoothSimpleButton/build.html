@@ -71,19 +71,44 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  final ThemeData themeData = Theme.of(context);
-  return MaterialButton(
-    color: buttonColor ?? themeData.colorScheme.primary,
-    child: Padding(
-      padding: padding,
-      child: child,
+  return ConstrainedBox(
+    constraints: BoxConstraints(
+      minWidth: minWidth,
+      minHeight: height,
     ),
-    height: height,
-    minWidth: minWidth,
-    shape: RoundedRectangleBorder(
-      borderRadius: borderRadius,
+    child: ElevatedButton(
+      style: ButtonStyle(
+        elevation: elevation,
+        backgroundColor: buttonColor == null
+            ? null
+            : WidgetStateProperty.all&lt;Color&gt;(buttonColor!),
+        shape: WidgetStateProperty.all&lt;RoundedRectangleBorder&gt;(
+          RoundedRectangleBorder(
+            borderRadius: borderRadius ?? ROUNDED_BORDER_RADIUS,
+          ),
+        ),
+        overlayColor: context.read&lt;ThemeProvider&gt;().isAmoledTheme
+            ? WidgetStateProperty.resolveWith((Set&lt;WidgetState&gt; states) {
+                return states.contains(WidgetState.pressed)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .primary
+                        .withValues(alpha: 0.3)
+                    : null;
+              })
+            : null,
+        side: context.read&lt;ThemeProvider&gt;().isAmoledTheme
+            ? WidgetStateProperty.all&lt;BorderSide&gt;(
+                const BorderSide(color: Colors.white),
+              )
+            : null,
+      ),
+      onPressed: onPressed,
+      child: Padding(
+        padding: padding,
+        child: child,
+      ),
     ),
-    onPressed: () =&gt; onPressed(),
   );
 }</code></pre>
 </section>
@@ -119,6 +144,7 @@ Widget build(BuildContext context) {
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_generic_lib_buttons_smooth_simple_button/SmoothSimpleButton/borderRadius.html">borderRadius</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_generic_lib_buttons_smooth_simple_button/SmoothSimpleButton/buttonColor.html">buttonColor</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_generic_lib_buttons_smooth_simple_button/SmoothSimpleButton/child.html">child</a></li>
+    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_generic_lib_buttons_smooth_simple_button/SmoothSimpleButton/elevation.html">elevation</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_generic_lib_buttons_smooth_simple_button/SmoothSimpleButton/height.html">height</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_generic_lib_buttons_smooth_simple_button/SmoothSimpleButton/minWidth.html">minWidth</a></li>
@@ -149,7 +175,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

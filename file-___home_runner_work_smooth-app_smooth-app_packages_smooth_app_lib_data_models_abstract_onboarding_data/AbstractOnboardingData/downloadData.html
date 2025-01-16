@@ -51,7 +51,7 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
 <span class="name ">downloadData</span>(<wbr>)
 
       
@@ -59,20 +59,21 @@
     </section>
     
 <section class="desc markdown">
-  <p>Downloads data and store it locally.</p>
+  <p>Downloads data and store it locally, then returns true when success</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; downloadData() async {
+  <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; downloadData() async {
   try {
     final String string = await downloadDataString();
     final DaoString daoString = DaoString(_localDatabase);
     await daoString.put(_getDatabaseKey(), string);
+    return true;
   } catch (e) {
-    &#47;&#47;
+    return false;
   }
 }</code></pre>
 </section>
@@ -139,7 +140,7 @@
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

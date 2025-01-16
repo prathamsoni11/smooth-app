@@ -59,7 +59,11 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">OnboardingFlowNavigator(this._userPreferences);</code></pre>
+  <pre class="language-dart"><code class="language-dart">OnboardingFlowNavigator(this._userPreferences) {
+  if (_historyOnboardingNav.isEmpty) {
+    _historyOnboardingNav.add(_userPreferences.lastVisitedOnboardingPage);
+  }
+}</code></pre>
 </section>
 
 
@@ -94,7 +98,6 @@
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator-class.html#instance-methods">Methods</a></li>
-    <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/getPageWidget.html">getPageWidget</a></li>
     <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/navigateToPage.html">navigateToPage</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
@@ -105,7 +108,7 @@
 
 
         <li class="section-title"><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator-class.html#static-methods">Static methods</a></li>
-          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/getNextPage.html">getNextPage</a></li>
+          <li><a href="../../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_pages_onboarding_onboarding_flow_navigator/OnboardingFlowNavigator/isOnboardingPagedInHistory.html">isOnboardingPagedInHistory</a></li>
 
 </ol>
 
@@ -119,7 +122,7 @@
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

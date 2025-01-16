@@ -70,6 +70,31 @@
       <h2>Properties</h2>
 
       <dl class="properties">
+        <dt id="compareFeatureAvailable" class="property">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/compareFeatureAvailable.html">compareFeatureAvailable</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+  If we can compare products
+(= meaning we have at least two existing products)
+  <div class="features">read-only</div>
+
+</dd>
+
+        <dt id="compareFeatureEnabled" class="property">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/compareFeatureEnabled.html">compareFeatureEnabled</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+  Whether we can show the user an interface to compare products
+BUT it doesn't necessary we can't compare yet.
+Please refer instead to <a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/compareFeatureAvailable.html">compareFeatureAvailable</a>
+  <div class="features">read-only</div>
+
+</dd>
+
         <dt id="hashCode" class="property inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
   <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
@@ -81,9 +106,20 @@
 
 </dd>
 
-        <dt id="hasMoreThanOneProduct" class="property">
-  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/hasMoreThanOneProduct.html">hasMoreThanOneProduct</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+        <dt id="lastConsultedBarcode" class="property">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/lastConsultedBarcode.html">lastConsultedBarcode</a></span>
+  <span class="signature">&#8592; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features">write-only</div>
+
+</dd>
+
+        <dt id="latestConsultedBarcode" class="property">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/latestConsultedBarcode.html">latestConsultedBarcode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> 
 
 </dt>
 <dd>
@@ -136,6 +172,19 @@
 
 </dd>
 
+        <dt id="getAvailableBarcodes" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getAvailableBarcodes.html">getAvailableBarcodes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  List only barcodes where the product exists
+  
+
+</dd>
+
         <dt id="getBarcodes" class="callable">
   <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getBarcodes.html">getBarcodes</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>
@@ -144,7 +193,7 @@
 
 </dt>
 <dd>
-  
+  List all barcodes scanned (even products being loaded or not found)
   
 
 </dd>
@@ -152,19 +201,6 @@
         <dt id="getBarcodeState" class="callable">
   <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getBarcodeState.html">getBarcodeState</a></span><span class="signature">(<wbr><span class="parameter" id="getBarcodeState-param-barcode"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span></span>)
     <span class="returntype parameter">&#8594; <a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ScannedProductState.html">ScannedProductState</a>?</span>
-  </span>
-  
-
-</dt>
-<dd>
-  
-  
-
-</dd>
-
-        <dt id="getProduct" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getProduct.html">getProduct</a></span><span class="signature">(<wbr><span class="parameter" id="getProduct-param-barcode"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span></span>)
-    <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
 
@@ -201,15 +237,29 @@
 
 </dd>
 
-        <dt id="onScan" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/onScan.html">onScan</a></span><span class="signature">(<wbr><span class="parameter" id="onScan-param-code"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">code</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+        <dt id="onCreateProduct" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/onCreateProduct.html">onCreateProduct</a></span><span class="signature">(<wbr><span class="parameter" id="onCreateProduct-param-barcode"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">barcode</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd>
   
+  
+
+</dd>
+
+        <dt id="onScan" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/onScan.html">onScan</a></span><span class="signature">(<wbr><span class="parameter" id="onScan-param-code"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">code</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds a barcode
+Will return <code>true</code> if this barcode is successfully added
   
 
 </dd>
@@ -229,6 +279,19 @@
 
         <dt id="refreshProductList" class="callable">
   <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/refreshProductList.html">refreshProductList</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="removeBarcode" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/removeBarcode.html">removeBarcode</a></span><span class="signature">(<wbr><span class="parameter" id="removeBarcode-param-barcode"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span></span>)
     <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
   </span>
   
@@ -338,21 +401,26 @@
     <li class="section-title">
       <a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel-class.html#instance-properties">Properties</a>
     </li>
+    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/compareFeatureAvailable.html">compareFeatureAvailable</a></li>
+    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/compareFeatureEnabled.html">compareFeatureEnabled</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/hasMoreThanOneProduct.html">hasMoreThanOneProduct</a></li>
+    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/lastConsultedBarcode.html">lastConsultedBarcode</a></li>
+    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/latestConsultedBarcode.html">latestConsultedBarcode</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/productList.html">productList</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel-class.html#instance-methods">Methods</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/clearScanSession.html">clearScanSession</a></li>
+    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getAvailableBarcodes.html">getAvailableBarcodes</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getBarcodes.html">getBarcodes</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getBarcodeState.html">getBarcodeState</a></li>
-    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/getProduct.html">getProduct</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/load.html">load</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/onCreateProduct.html">onCreateProduct</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/onScan.html">onScan</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/refresh.html">refresh</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/refreshProductList.html">refreshProductList</a></li>
+    <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/removeBarcode.html">removeBarcode</a></li>
     <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_data_models_continuous_scan_model/ContinuousScanModel/retryBarcodeFetch.html">retryBarcodeFetch</a></li>
     <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
 
@@ -371,7 +439,7 @@
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

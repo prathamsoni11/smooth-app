@@ -71,50 +71,87 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
-  return WillPopScope(
+  final AppLocalizations appLocalizations = AppLocalizations.of(context);
+  final ExternalScanCarouselManagerState carouselManager =
+      ExternalScanCarouselManager.watch(context);
+
+  if (carouselManager.forceShowScannerTab) {
+    _currentPage = BottomNavigationTab.Scan;
+  }
+
+  final List&lt;Widget&gt; tabs = &lt;Widget&gt;[
+    _buildOffstageNavigator(BottomNavigationTab.Profile),
+    _buildOffstageNavigator(BottomNavigationTab.Scan),
+    _buildOffstageNavigator(BottomNavigationTab.List),
+  ];
+
+  final UserPreferences userPreferences = context.watch&lt;UserPreferences&gt;();
+  final bool isProd = userPreferences
+          .getFlag(UserPreferencesDevMode.userPreferencesFlagProd) ??
+      true;
+  final Widget bar = DecoratedBox(
+    decoration: BoxDecoration(
+      boxShadow: &lt;BoxShadow&gt;[
+        BoxShadow(
+          color: Theme.of(context).shadowColor.withValues(alpha: 0.3),
+          offset: Offset.zero,
+          blurRadius: 10.0,
+          spreadRadius: 1.0,
+        ),
+      ],
+    ),
+    child: icons.AppIconTheme(
+      size: 20.0,
+      child: SmoothNavigationBar(
+        destinations: &lt;SmoothNavigationDestination&gt;[
+          SmoothNavigationDestination(
+            icon: const icons.Profile(),
+            label: appLocalizations.profile_navbar_label,
+          ),
+          SmoothNavigationDestination(
+            icon: const icons.Search.alt(),
+            label: appLocalizations.scan_navbar_label,
+          ),
+          SmoothNavigationDestination(
+            icon: const icons.Lists(),
+            label: appLocalizations.list_navbar_label,
+          ),
+        ],
+        selectedIndex: _currentPage.index,
+        onDestinationSelected: (int index) {
+          if (_currentPage == BottomNavigationTab.Scan &amp;&amp;
+              _pageKeys[index] == BottomNavigationTab.Scan) {
+            carouselManager.showSearchCard();
+          }
+
+          _selectTab(_pageKeys[index], index);
+        },
+      ),
+    ),
+  );
+  return WillPopScope2(
     onWillPop: () async {
       final bool isFirstRouteInCurrentTab =
           !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
       if (isFirstRouteInCurrentTab) {
         if (_currentPage != BottomNavigationTab.Scan) {
           _selectTab(BottomNavigationTab.Scan, 1);
-          return false;
+          return (false, null);
         }
       }
       &#47;&#47; let system handle back button if we&#39;re on the first route
-      return isFirstRouteInCurrentTab;
+      return (isFirstRouteInCurrentTab, null);
     },
     child: Scaffold(
-      body: Stack(children: &lt;Widget&gt;[
-        _buildOffstageNavigator(BottomNavigationTab.Profile),
-        _buildOffstageNavigator(BottomNavigationTab.Scan),
-        _buildOffstageNavigator(BottomNavigationTab.History),
-      ]),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: Colors.white,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        onTap: (int index) {
-          _selectTab(_pageKeys[index], index);
-        },
-        currentIndex: _currentPage.index,
-        items: &lt;BottomNavigationBarItem&gt;[
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.account_circle),
-            label: appLocalizations.profile_navbar_label,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.search),
-            label: appLocalizations.scan_navbar_label,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.history),
-            label: appLocalizations.history_navbar_label,
-          ),
-        ],
-      ),
+      body: Stack(children: tabs),
+      bottomNavigationBar: isProd
+          ? bar
+          : Banner(
+              message: &#39;TEST ENV&#39;,
+              location: BannerLocation.bottomEnd,
+              color: Colors.blue,
+              child: bar,
+            ),
     ),
   );
 }</code></pre>
@@ -174,7 +211,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

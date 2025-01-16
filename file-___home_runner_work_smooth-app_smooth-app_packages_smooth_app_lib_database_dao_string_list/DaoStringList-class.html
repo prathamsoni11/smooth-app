@@ -50,7 +50,7 @@
 
     
 <section class="desc markdown">
-  <p>Where we store string lists</p>
+  <p>Where we store string lists with unique items.</p>
 </section>
 
 
@@ -105,21 +105,21 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="add" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/add.html">add</a></span><span class="signature">(<wbr><span class="parameter" id="add-param-string"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">string</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/add.html">add</a></span><span class="signature">(<wbr><span class="parameter" id="add-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span>, </span><span class="parameter" id="add-param-string"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">string</span></span>)
     <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd>
-  
+  Adds a unique value to the end. Removes is before if it pre-existed.
   
 
 </dd>
 
         <dt id="getAll" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/getAll.html">getAll</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/getAll.html">getAll</a></span><span class="signature">(<wbr><span class="parameter" id="getAll-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>
   </span>
   
 
@@ -170,7 +170,7 @@
 </dd>
 
         <dt id="remove" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/remove.html">remove</a></span><span class="signature">(<wbr><span class="parameter" id="remove-param-string"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">string</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/remove.html">remove</a></span><span class="signature">(<wbr><span class="parameter" id="remove-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span>, </span><span class="parameter" id="remove-param-item"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">item</span></span>)
     <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
   </span>
   
@@ -222,6 +222,117 @@
     
     
 
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+
+    <dl class="properties">
+        <dt id="keyLanguages" class="constant">
+    <span class="name "><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyLanguages-constant.html">keyLanguages</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Key for the list of latest languages used in the app.
+  
+
+  <div>
+    <span class="signature"><code>&#39;languages&#39;</code></span>
+  </div>
+</dd>
+
+        <dt id="keyPriceStores" class="constant">
+    <span class="name "><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyPriceStores-constant.html">keyPriceStores</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Key for the list of favorite stores (for price additions).
+  
+
+  <div>
+    <span class="signature"><code>&#39;priceStores&#39;</code></span>
+  </div>
+</dd>
+
+        <dt id="keySearchLocationHistory" class="constant">
+    <span class="name "><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keySearchLocationHistory-constant.html">keySearchLocationHistory</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Key for the list of location search history
+  
+
+  <div>
+    <span class="signature"><code>&#39;searchLocationHistory&#39;</code></span>
+  </div>
+</dd>
+
+        <dt id="keySearchProductHistory" class="constant">
+    <span class="name "><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keySearchProductHistory-constant.html">keySearchProductHistory</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Key for the list of product search history.
+  
+
+  <div>
+    <span class="signature"><code>&#39;searchHistory&#39;</code></span>
+  </div>
+</dd>
+
+        <dt id="keyTasksFast" class="constant">
+    <span class="name "><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyTasksFast-constant.html">keyTasksFast</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Key for the list of task ids (fast tasks like product detail change).
+  
+
+  <div>
+    <span class="signature"><code>&#39;tasks&#39;</code></span>
+  </div>
+</dd>
+
+        <dt id="keyTasksLongHaul" class="constant">
+    <span class="name "><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyTasksLongHaul-constant.html">keyTasksLongHaul</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Key for the list of task ids (long haul tasks like full refresh).
+  
+
+  <div>
+    <span class="signature"><code>&#39;tasksLongHaul&#39;</code></span>
+  </div>
+</dd>
+
+        <dt id="keyTasksSlow" class="constant">
+    <span class="name "><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyTasksSlow-constant.html">keyTasksSlow</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Key for the list of task ids (slow tasks like image uploads).
+  
+
+  <div>
+    <span class="signature"><code>&#39;tasksSlow&#39;</code></span>
+  </div>
+</dd>
+
+    </dl>
+  </section>
 
   </div> <!-- /.main-content -->
 
@@ -283,6 +394,14 @@
 
 
 
+        <li class="section-title"><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList-class.html#constants">Constants</a></li>
+          <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyLanguages-constant.html">keyLanguages</a></li>
+          <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyPriceStores-constant.html">keyPriceStores</a></li>
+          <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keySearchLocationHistory-constant.html">keySearchLocationHistory</a></li>
+          <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keySearchProductHistory-constant.html">keySearchProductHistory</a></li>
+          <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyTasksFast-constant.html">keyTasksFast</a></li>
+          <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyTasksLongHaul-constant.html">keyTasksLongHaul</a></li>
+          <li><a href="../file-___home_runner_work_smooth-app_smooth-app_packages_smooth_app_lib_database_dao_string_list/DaoStringList/keyTasksSlow-constant.html">keyTasksSlow</a></li>
 </ol>
 
   </div><!--/.sidebar-offcanvas-->
@@ -292,7 +411,7 @@
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   

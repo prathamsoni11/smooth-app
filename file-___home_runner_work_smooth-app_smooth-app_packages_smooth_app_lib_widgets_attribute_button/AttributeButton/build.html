@@ -72,42 +72,94 @@
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
-  String importanceId =
+  final String currentImportanceId =
       productPreferences.getImportanceIdForAttributeId(attribute.id!);
-  &#47;&#47; We switch from 4 to 3 choices: very important is downgraded to important
-  if (importanceId == PreferenceImportance.ID_VERY_IMPORTANT) {
-    importanceId = PreferenceImportance.ID_IMPORTANT;
-  }
   const double horizontalPadding = LARGE_SPACE;
-  final double screenWidth =
-      MediaQuery.of(context).size.width - 2 * horizontalPadding;
-  final TextStyle style = themeData.textTheme.headline3!;
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: &lt;Widget&gt;[
-        SizedBox(
-          width: screenWidth * .45,
-          child: Text(attribute.name!, style: style),
-        ),
-        SizedBox(
-          width: screenWidth * .45,
-          child: ElevatedButton(
-            child: Text(
-              productPreferences
-                  .getPreferenceImportanceFromImportanceId(importanceId)!
-                  .name!,
-              style: style.copyWith(color: Colors.white),
+  final double widgetWidth =
+      MediaQuery.sizeOf(context).width - 2 * horizontalPadding;
+  final double importanceWidth = widgetWidth &#47; 4;
+  final TextStyle style = themeData.textTheme.headlineMedium!;
+  final String? info = attribute.settingNote;
+  final List&lt;Widget&gt; children = &lt;Widget&gt;[];
+  for (final String importanceId in _importanceIds) {
+    children.add(
+      Expanded(
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: () async =&gt; productPreferences.setImportance(
+              attribute.id!,
+              importanceId,
             ),
-            style: ElevatedButton.styleFrom(
-              primary: _colors[importanceId],
-              onPrimary: Colors.white,
+            child: Container(
+              width: importanceWidth,
+              margin: const EdgeInsets.symmetric(horizontal: 2.0),
+              constraints:
+                  const BoxConstraints(minHeight: MINIMUM_TOUCH_SIZE),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: &lt;Widget&gt;[
+                  Icon(
+                    currentImportanceId == importanceId
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_off,
+                    color: themeData.colorScheme.primary,
+                  ),
+                  const SizedBox(height: VERY_SMALL_SPACE),
+                  AutoSizeText(
+                    productPreferences
+                        .getPreferenceImportanceFromImportanceId(
+                            importanceId)!
+                        .name!,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
-            onPressed: () async =&gt; productPreferences.setImportance(
-                attribute.id!, _nextValues[importanceId]!),
           ),
+        ),
+      ),
+    );
+  }
+  return Padding(
+    padding: const EdgeInsets.symmetric(
+      vertical: SMALL_SPACE,
+      horizontal: horizontalPadding,
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: &lt;Widget&gt;[
+        ListTile(
+          trailing: info == null ? null : const Icon(Icons.info_outline),
+          title: AutoSizeText(
+            attribute.settingName ?? attribute.name!,
+            maxLines: 2,
+            style: style,
+          ),
+          onTap: info == null
+              ? null
+              : () async =&gt; showDialog&lt;void&gt;(
+                    context: context,
+                    builder: (BuildContext context) {
+                      final AppLocalizations appLocalizations =
+                          AppLocalizations.of(context);
+                      return SmoothAlertDialog(
+                        body: Text(info),
+                        positiveAction: SmoothActionButton(
+                          text: appLocalizations.close,
+                          onPressed: () =&gt; Navigator.pop(context),
+                        ),
+                      );
+                    },
+                  ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: children,
         ),
       ],
     ),
@@ -171,7 +223,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     smooth_app
-      0.0.0
+      0.0.0+734
   </span>
 
   
